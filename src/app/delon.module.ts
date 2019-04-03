@@ -45,7 +45,7 @@ import { PageHeaderConfig } from '@delon/abc';
 export function fnPageHeaderConfig(): PageHeaderConfig {
   return {
     ...new PageHeaderConfig(),
-    ...{ homeI18n: 'home' } as PageHeaderConfig
+    ...{ homeI18n: 'TestOnlineSystem' } as PageHeaderConfig
   };
 }
 

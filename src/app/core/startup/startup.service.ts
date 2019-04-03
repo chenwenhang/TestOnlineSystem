@@ -87,29 +87,29 @@ export class StartupService {
     // 初始化菜单
     this.menuService.add([
       {
-        text: '主导航',
+        text: '管理端',
         group: true,
         children: [
           {
             text: '试题管理',
-            link: '/question-manage',
+            link: '/manage/question-manage',
             icon: { type: 'icon', value: 'appstore' }
           },
           {
             text: '考卷管理',
-            link: '/exam-manage',
+            link: '/manage/exam-manage',
             icon: { type: 'icon', value: 'profile' },
             shortcutRoot: true
           },
           {
             text: '职业管理',
-            link: '/job-manage',
+            link: '/manage/job-manage',
             icon: { type: 'icon', value: 'rocket' },
             shortcutRoot: true
           },
           {
             text: '用户管理',
-            link: '/user-manage',
+            link: '/manage/user-manage',
             icon: { type: 'icon', value: 'user' },
             shortcutRoot: true
           }
