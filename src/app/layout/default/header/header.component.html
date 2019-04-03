@@ -12,18 +12,6 @@
         <i nz-icon type="menu-{{settings.layout.collapsed ? 'unfold' : 'fold'}}"></i>
       </div>
     </li>
-    <!-- Github Page -->
-    <li>
-      <a class="alain-default__nav-item" href="//github.com/ng-alain/ng-alain" target="_blank">
-        <i nz-icon type="github"></i>
-      </a>
-    </li>
-    <!-- Lock Page -->
-    <li class="hidden-mobile">
-      <div class="alain-default__nav-item" [routerLink]="['/lock']">
-        <i nz-icon type="lock"></i>
-      </div>
-    </li>
     <!-- Search Button -->
     <li class="hidden-pc" (click)="searchToggleChange()">
       <div class="alain-default__nav-item">
@@ -36,14 +24,6 @@
     <!-- Notify -->
     <li>
       <header-notify></header-notify>
-    </li>
-    <!-- Task -->
-    <li class="hidden-mobile">
-      <header-task></header-task>
-    </li>
-    <!-- App Icons -->
-    <li class="hidden-mobile">
-      <header-icon></header-icon>
     </li>
     <!-- Settings -->
     <li class="hidden-mobile">

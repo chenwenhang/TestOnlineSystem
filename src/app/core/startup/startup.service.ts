@@ -91,13 +91,26 @@ export class StartupService {
         group: true,
         children: [
           {
-            text: '仪表盘',
-            link: '/dashboard',
+            text: '试题管理',
+            link: '/question-manage',
             icon: { type: 'icon', value: 'appstore' }
           },
           {
-            text: '快捷菜单',
+            text: '考卷管理',
+            link: '/exam-manage',
+            icon: { type: 'icon', value: 'profile' },
+            shortcutRoot: true
+          },
+          {
+            text: '职业管理',
+            link: '/job-manage',
             icon: { type: 'icon', value: 'rocket' },
+            shortcutRoot: true
+          },
+          {
+            text: '用户管理',
+            link: '/user-manage',
+            icon: { type: 'icon', value: 'user' },
             shortcutRoot: true
           }
         ]
