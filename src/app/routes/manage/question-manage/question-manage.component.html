@@ -5,5 +5,11 @@
 </page-header>
 <nz-card>
   <sf mode="search" [schema]="searchSchema" (formSubmit)="st.reset($event)" (formReset)="st.reset($event)"></sf>
-  <st #st [data]="url" [columns]="columns"></st>
+  <st #st [data]="url" [columns]="columns">
+    <ng-template st-row="custom" let-item let-index="index">
+      <nz-tooltip>
+        <nz-tag [nzColor]="'green'" *ngFor="let element of item.tag">{{element}}</nz-tag>
+      </nz-tooltip>
+    </ng-template>
+  </st>
 </nz-card>
