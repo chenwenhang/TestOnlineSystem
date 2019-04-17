@@ -4,10 +4,10 @@ import { _HttpClient } from '@delon/theme';
 import { SFSchema, SFUISchema } from '@delon/form';
 
 @Component({
-  selector: 'app-manage-exam-manage-edit',
+  selector: 'app-manage-tag-manage-edit',
   templateUrl: './edit.component.html',
 })
-export class ManageExamManageEditComponent implements OnInit {
+export class ManageTagManageEditComponent implements OnInit {
   record: any = {};
   i: any;
   schema: SFSchema = {

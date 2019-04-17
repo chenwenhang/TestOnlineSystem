@@ -36,8 +36,8 @@ export class StartupService {
     ).pipe(
       // 接收其他拦截器后产生的异常消息
       catchError(([appData]) => {
-          resolve(null);
-          return [appData];
+        resolve(null);
+        return [appData];
       })
     ).subscribe(([appData]) => {
 
@@ -54,12 +54,12 @@ export class StartupService {
       // 设置页面标题的后缀
       this.titleService.suffix = res.app.name;
     },
-    () => { },
-    () => {
-      resolve(null);
-    });
+      () => { },
+      () => {
+        resolve(null);
+      });
   }
-  
+
   private viaMock(resolve: any, reject: any) {
     // const tokenData = this.tokenService.get();
     // if (!tokenData.token) {
@@ -76,6 +76,7 @@ export class StartupService {
       name: 'Admin',
       avatar: './assets/tmp/img/avatar.jpg',
       email: 'cipchk@qq.com',
+      power: 1,
       token: '123456789'
     };
     // 应用信息：包括站点名、描述、年份
@@ -87,8 +88,35 @@ export class StartupService {
     // 初始化菜单
     this.menuService.add([
       {
-        text: '管理端',
+        text: '客户端',
         group: true,
+        children: [
+          {
+            text: '模拟考试',
+            link: '/client/mock-exam',
+            icon: { type: 'icon', value: 'file' }
+          },
+          {
+            text: '正式考试',
+            link: '/client/formal-exam',
+            icon: { type: 'icon', value: 'file-text' }
+          },
+          {
+            text: '考试记录',
+            link: '/client/exam-history',
+            icon: { type: 'icon', value: 'folder' }
+          },
+          {
+            text: '我的收藏',
+            link: '/client/question-collection',
+            icon: { type: 'icon', value: 'star' }
+          }
+        ]
+      },
+      {
+        text: '内容发布端',
+        group: true,
+        hide: user.power <= 2 ? false : true,
         children: [
           {
             text: '试题管理',
@@ -97,20 +125,29 @@ export class StartupService {
           },
           {
             text: '考卷管理',
-            link: '/manage/exam-manage',
+            link: '/manage/paper-manage',
             icon: { type: 'icon', value: 'profile' },
             shortcutRoot: true
           },
           {
             text: '职业管理',
-            link: '/manage/job-manage',
+            link: '/manage/occupation-manage',
             icon: { type: 'icon', value: 'rocket' },
+            hide: user.power <= 1 ? false : true,
+            shortcutRoot: true
+          },
+          {
+            text: '标签管理',
+            link: '/manage/tag-manage',
+            icon: { type: 'icon', value: 'tags' },
+            hide: user.power <= 1 ? false : true,
             shortcutRoot: true
           },
           {
             text: '用户管理',
             link: '/manage/user-manage',
             icon: { type: 'icon', value: 'user' },
+            hide: user.power <= 1 ? false : true,
             shortcutRoot: true
           }
         ]
@@ -118,6 +155,9 @@ export class StartupService {
     ]);
     // 设置页面标题的后缀
     this.titleService.suffix = app.name;
+    // if(true){
+    //   console.log(this.menuService.menus);
+    // }
 
     resolve({});
   }

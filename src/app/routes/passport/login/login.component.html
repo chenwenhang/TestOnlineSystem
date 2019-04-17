@@ -1,3 +1,10 @@
+<!--
+ * @Author: Chen Wenhang
+ * @Description: 
+ * @Github: https://github.com/chenwenhang
+ * @Date: 2018-12-29 20:01:43
+ * @LastEditTime: 2019-04-17 23:27:36
+ -->
 <form nz-form [formGroup]="form" (ngSubmit)="submit()" role="form">
   <nz-tabset [nzAnimated]="false" class="tabs" (nzSelectChange)="switch($event)">
     <nz-tab [nzTitle]="'账户密码登录'">
@@ -8,7 +15,7 @@
             <input nz-input formControlName="userName" placeholder="username: admin or user">
           </nz-input-group>
           <nz-form-explain *ngIf="userName.dirty && userName.errors">
-            Please enter mobile number!
+            请输入帐号！
           </nz-form-explain>
         </nz-form-control>
       </nz-form-item>
@@ -18,7 +25,7 @@
             <input nz-input type="password" formControlName="password" placeholder="password: ng-alain.com">
           </nz-input-group>
           <nz-form-explain *ngIf="password.dirty && password.errors">
-            Please enter password!
+            请输入密码！
           </nz-form-explain>
         </nz-form-control>
       </nz-form-item>
@@ -51,7 +58,8 @@
               </nz-form-explain>
             </nz-col>
             <nz-col [nzSpan]="8">
-              <button type="button" nz-button nzSize="large" (click)="getCaptcha()" [disabled]="count" nzBlock [nzLoading]="http.loading">
+              <button type="button" nz-button nzSize="large" (click)="getCaptcha()" [disabled]="count" nzBlock
+                [nzLoading]="http.loading">
                 {{ count ? count + 's' : '获取验证码'}}
               </button>
             </nz-col>
@@ -76,7 +84,8 @@
 </form>
 <div class="other">
   其他登录方式
-  <i nz-tooltip="in fact Auth0 via window" (click)="open('auth0', 'window')" nz-icon type="alipay-circle" class="icon"></i>
+  <i nz-tooltip="in fact Auth0 via window" (click)="open('auth0', 'window')" nz-icon type="alipay-circle"
+    class="icon"></i>
   <i nz-tooltip="in fact Github via redirect" (click)="open('github')" nz-icon type="taobao-circle" class="icon"></i>
   <i (click)="open('weibo', 'window')" nz-icon type="weibo-circle" class="icon"></i>
   <a class="register" routerLink="/passport/register">注册账户</a>

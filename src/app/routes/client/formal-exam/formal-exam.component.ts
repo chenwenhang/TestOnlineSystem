@@ -4,10 +4,10 @@ import { STColumn, STComponent } from '@delon/abc';
 import { SFSchema } from '@delon/form';
 
 @Component({
-  selector: 'app-manage-exam-manage',
-  templateUrl: './exam-manage.component.html',
+  selector: 'app-client-formal-exam',
+  templateUrl: './formal-exam.component.html',
 })
-export class ManageExamManageComponent implements OnInit {
+export class ClientFormalExamComponent implements OnInit {
   url = `/user`;
   searchSchema: SFSchema = {
     properties: {

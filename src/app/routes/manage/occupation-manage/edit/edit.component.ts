@@ -4,10 +4,10 @@ import { _HttpClient } from '@delon/theme';
 import { SFSchema, SFUISchema } from '@delon/form';
 
 @Component({
-  selector: 'app-manage-job-manage-edit',
+  selector: 'app-manage-occupation-manage-edit',
   templateUrl: './edit.component.html',
 })
-export class ManageJobManageEditComponent implements OnInit {
+export class ManageOccupationManageEditComponent implements OnInit {
   record: any = {};
   i: any;
   schema: SFSchema = {

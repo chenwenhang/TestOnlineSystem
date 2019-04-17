@@ -3,10 +3,10 @@ import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 
 @Component({
-  selector: 'app-manage-exam-manage-view',
+  selector: 'app-manage-tag-manage-view',
   templateUrl: './view.component.html',
 })
-export class ManageExamManageViewComponent implements OnInit {
+export class ManageTagManageViewComponent implements OnInit {
   record: any = {};
   i: any;
 

@@ -4,30 +4,36 @@ import { ManageRoutingModule } from './manage-routing.module';
 import { ManageQuestionManageComponent } from './question-manage/question-manage.component';
 import { ManageQuestionManageEditComponent } from './question-manage/edit/edit.component';
 import { ManageQuestionManageViewComponent } from './question-manage/view/view.component';
-import { ManageExamManageComponent } from './exam-manage/exam-manage.component';
-import { ManageExamManageEditComponent } from './exam-manage/edit/edit.component';
-import { ManageExamManageViewComponent } from './exam-manage/view/view.component';
-import { ManageJobManageComponent } from './job-manage/job-manage.component';
-import { ManageJobManageEditComponent } from './job-manage/edit/edit.component';
-import { ManageJobManageViewComponent } from './job-manage/view/view.component';
 import { ManageUserManageComponent } from './user-manage/user-manage.component';
 import { ManageUserManageEditComponent } from './user-manage/edit/edit.component';
 import { ManageUserManageViewComponent } from './user-manage/view/view.component';
+import { ManageTagManageComponent } from './tag-manage/tag-manage.component';
+import { ManageTagManageEditComponent } from './tag-manage/edit/edit.component';
+import { ManageTagManageViewComponent } from './tag-manage/view/view.component';
+import { ManagePaperManageComponent } from './paper-manage/paper-manage.component';
+import { ManagePaperManageEditComponent } from './paper-manage/edit/edit.component';
+import { ManagePaperManageViewComponent } from './paper-manage/view/view.component';
+import { ManageOccupationManageComponent } from './occupation-manage/occupation-manage.component';
+import { ManageOccupationManageEditComponent } from './occupation-manage/edit/edit.component';
+import { ManageOccupationManageViewComponent } from './occupation-manage/view/view.component';
 
 const COMPONENTS = [
   ManageQuestionManageComponent,
-  ManageExamManageComponent,
-  ManageJobManageComponent,
-  ManageUserManageComponent];
+  ManageUserManageComponent,
+  ManageTagManageComponent,
+  ManagePaperManageComponent,
+  ManageOccupationManageComponent];
 const COMPONENTS_NOROUNT = [
   ManageQuestionManageEditComponent,
   ManageQuestionManageViewComponent,
-  ManageExamManageEditComponent,
-  ManageExamManageViewComponent,
-  ManageJobManageEditComponent,
-  ManageJobManageViewComponent,
   ManageUserManageEditComponent,
-  ManageUserManageViewComponent];
+  ManageUserManageViewComponent,
+  ManageTagManageEditComponent,
+  ManageTagManageViewComponent,
+  ManagePaperManageEditComponent,
+  ManagePaperManageViewComponent,
+  ManageOccupationManageEditComponent,
+  ManageOccupationManageViewComponent];
 
 @NgModule({
   imports: [
