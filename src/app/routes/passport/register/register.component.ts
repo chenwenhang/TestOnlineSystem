@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   FormGroup,
@@ -8,6 +8,8 @@ import {
 } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'passport-register',
@@ -15,6 +17,7 @@ import { _HttpClient } from '@delon/theme';
   styleUrls: ['./register.component.less'],
 })
 export class UserRegisterComponent implements OnDestroy {
+
   form: FormGroup;
   error = '';
   type = 0;
@@ -34,12 +37,15 @@ export class UserRegisterComponent implements OnDestroy {
     public msg: NzMessageService,
   ) {
     this.form = fb.group({
+      userName: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
       mail: [null, [Validators.required, Validators.email]],
+      nickname: [null, [Validators.required]],
       password: [
         null,
         [
           Validators.required,
           Validators.minLength(6),
+          Validators.maxLength(15),
           UserRegisterComponent.checkPassword.bind(this),
         ],
       ],
@@ -48,14 +54,16 @@ export class UserRegisterComponent implements OnDestroy {
         [
           Validators.required,
           Validators.minLength(6),
+          Validators.maxLength(15),
           UserRegisterComponent.passwordEquar,
         ],
       ],
-      mobilePrefix: ['+86'],
-      mobile: [null, [Validators.required, Validators.pattern(/^1\d{10}$/)]],
-      captcha: [null, [Validators.required]],
+      // mobilePrefix: ['+86'],
+      // mobile: [null, [Validators.required, Validators.pattern(/^1\d{10}$/)]],
+      // captcha: [null, [Validators.required]],
     });
   }
+
 
   static checkPassword(control: FormControl) {
     if (!control) return null;
@@ -86,7 +94,12 @@ export class UserRegisterComponent implements OnDestroy {
   }
 
   // #region fields
-
+  get nickname() {
+    return this.form.controls.nickname;
+  }
+  get userName() {
+    return this.form.controls.userName;
+  }
   get mail() {
     return this.form.controls.mail;
   }
@@ -126,6 +139,7 @@ export class UserRegisterComponent implements OnDestroy {
   // #endregion
 
   submit() {
+
     this.error = '';
     for (const i in this.form.controls) {
       this.form.controls[i].markAsDirty();
@@ -136,9 +150,25 @@ export class UserRegisterComponent implements OnDestroy {
     }
 
     const data = this.form.value;
-    this.http.post('/register', data).subscribe(() => {
-      this.router.navigateByUrl('/passport/register-result', {
-        queryParams: { email: data.mail },
+    data.email = data.mail;
+    data.username = data.userName;
+    delete data.mail;
+    delete data.userName;
+    delete data.confirm;
+
+
+    this.http.post('/login/register', data).subscribe((res: any) => {
+      if (!res.code) {
+        this.error = res.msg;
+        return;
+      }
+      console.log(data.username);
+
+      // this.router.navigateByUrl('/passport/register-result', {
+      //   queryParams: { username: data.username },
+      // });
+      this.router.navigate(['/passport/register-result'], {
+        queryParams: { username: data.username },
       });
     });
   }

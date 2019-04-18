@@ -3,7 +3,7 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2018-12-29 20:01:43
- * @LastEditTime: 2019-04-18 18:48:29
+ * @LastEditTime: 2019-04-18 20:43:39
  -->
 <form nz-form [formGroup]="form" (ngSubmit)="submit()" role="form">
   <nz-tabset [nzAnimated]="false" class="tabs" (nzSelectChange)="switch($event)">
@@ -12,10 +12,10 @@
       <nz-form-item>
         <nz-form-control>
           <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-user">
-            <input nz-input formControlName="userName" placeholder="用户名">
+            <input nz-input formControlName="userName" placeholder="帐号">
           </nz-input-group>
           <nz-form-explain *ngIf="userName.dirty && userName.errors">
-            帐号不合法！（4-6字符之间）
+            帐号不合法！（6-15字符之间）
           </nz-form-explain>
         </nz-form-control>
       </nz-form-item>
@@ -25,24 +25,25 @@
             <input nz-input type="password" formControlName="password" placeholder="密码">
           </nz-input-group>
           <nz-form-explain *ngIf="password.dirty && password.errors">
-            密码不合法！（4-6字符之间）
+            密码不合法！（6-15字符之间）
           </nz-form-explain>
         </nz-form-control>
       </nz-form-item>
     </nz-tab>
-    <!-- <nz-tab [nzTitle]="'手机号登录'">
+    <nz-tab [nzTitle]="'手机号登录'">
       <nz-form-item>
         <nz-form-control>
           <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-user">
             <input nz-input formControlName="mobile" placeholder="mobile number">
           </nz-input-group>
           <nz-form-explain *ngIf="mobile.dirty && mobile.errors">
-            <ng-container *ngIf="mobile.errors.required">
+            <!-- <ng-container *ngIf="mobile.errors.required">
               请输入手机号！
             </ng-container>
             <ng-container *ngIf="mobile.errors.pattern">
               手机号格式错误！
-            </ng-container>
+            </ng-container> -->
+            手机号格式错误！
           </nz-form-explain>
         </nz-form-control>
       </nz-form-item>
@@ -66,7 +67,7 @@
           </nz-row>
         </nz-form-control>
       </nz-form-item>
-    </nz-tab> -->
+    </nz-tab>
   </nz-tabset>
   <nz-form-item>
     <nz-col [nzSpan]="12">
