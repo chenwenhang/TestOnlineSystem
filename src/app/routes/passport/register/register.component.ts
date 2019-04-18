@@ -37,8 +37,8 @@ export class UserRegisterComponent implements OnDestroy {
     public msg: NzMessageService,
   ) {
     this.form = fb.group({
-      userName: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
-      mail: [null, [Validators.required, Validators.email]],
+      username: [null, [Validators.required, Validators.minLength(6), Validators.maxLength(15)]],
+      email: [null, [Validators.required, Validators.email]],
       nickname: [null, [Validators.required]],
       password: [
         null,
@@ -97,11 +97,11 @@ export class UserRegisterComponent implements OnDestroy {
   get nickname() {
     return this.form.controls.nickname;
   }
-  get userName() {
-    return this.form.controls.userName;
+  get username() {
+    return this.form.controls.username;
   }
-  get mail() {
-    return this.form.controls.mail;
+  get email() {
+    return this.form.controls.email;
   }
   get password() {
     return this.form.controls.password;
@@ -150,10 +150,6 @@ export class UserRegisterComponent implements OnDestroy {
     }
 
     const data = this.form.value;
-    data.email = data.mail;
-    data.username = data.userName;
-    delete data.mail;
-    delete data.userName;
     delete data.confirm;
 
 
@@ -162,11 +158,12 @@ export class UserRegisterComponent implements OnDestroy {
         this.error = res.msg;
         return;
       }
-      console.log(data.username);
+      // console.log(data);
 
       // this.router.navigateByUrl('/passport/register-result', {
       //   queryParams: { username: data.username },
       // });
+
       this.router.navigate(['/passport/register-result'], {
         queryParams: { username: data.username },
       });

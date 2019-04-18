@@ -3,7 +3,7 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2018-12-29 20:01:43
- * @LastEditTime: 2019-04-18 22:45:07
+ * @LastEditTime: 2019-04-18 23:56:11
  -->
 <h3>注册</h3>
 <form nz-form [formGroup]="form" (ngSubmit)="submit()" role="form">
@@ -11,10 +11,10 @@
   <nz-form-item>
     <nz-form-control>
       <nz-input-group nzSize="large" nzAddonBeforeIcon="anticon anticon-user">
-        <input nz-input formControlName="userName" placeholder="帐号">
+        <input nz-input formControlName="username" placeholder="帐号">
       </nz-input-group>
-      <ng-container *ngIf="userName.dirty && userName.errors">
-        <nz-form-explain *ngIf="userName.dirty && userName.errors">帐号不合法！（6-15字符之间）</nz-form-explain>
+      <ng-container *ngIf="username.dirty && username.errors">
+        <nz-form-explain *ngIf="username.dirty && username.errors">帐号不合法！（6-15字符之间）</nz-form-explain>
       </ng-container>
     </nz-form-control>
   </nz-form-item>
@@ -61,10 +61,10 @@
   <nz-form-item>
     <nz-form-control>
       <nz-input-group nzSize="large" nzAddonBeforeIcon="anticon anticon-user">
-        <input nz-input formControlName="mail" placeholder="邮箱">
+        <input nz-input formControlName="email" placeholder="邮箱">
       </nz-input-group>
-      <ng-container *ngIf="mail.dirty && mail.errors">
-        <nz-form-explain *ngIf="mail.dirty && mail.errors">邮箱不合法！</nz-form-explain>
+      <ng-container *ngIf="email.dirty && email.errors">
+        <nz-form-explain *ngIf="email.dirty && email.errors">邮箱不合法！</nz-form-explain>
       </ng-container>
     </nz-form-control>
   </nz-form-item>
