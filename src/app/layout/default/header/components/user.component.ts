@@ -12,14 +12,8 @@ import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
       {{settings.user.name}}
     </div>
     <div nz-menu class="width-sm">
-      <div nz-menu-item routerLink="/pro/account/center"><i nz-icon type="user" class="mr-sm"></i>
+      <div nz-menu-item routerLink="/client/userinfo"><i nz-icon type="user" class="mr-sm"></i>
         个人中心
-      </div>
-      <div nz-menu-item routerLink="/pro/account/settings"><i nz-icon type="setting" class="mr-sm"></i>
-        个人设置
-      </div>
-      <div nz-menu-item routerLink="/exception/trigger"><i nz-icon type="close-circle" class="mr-sm"></i>
-        触发错误
       </div>
       <li nz-menu-divider></li>
       <div nz-menu-item (click)="logout()"><i nz-icon type="logout" class="mr-sm"></i>

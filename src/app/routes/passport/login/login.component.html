@@ -3,7 +3,7 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2018-12-29 20:01:43
- * @LastEditTime: 2019-04-17 23:27:36
+ * @LastEditTime: 2019-04-18 18:48:29
  -->
 <form nz-form [formGroup]="form" (ngSubmit)="submit()" role="form">
   <nz-tabset [nzAnimated]="false" class="tabs" (nzSelectChange)="switch($event)">
@@ -12,25 +12,25 @@
       <nz-form-item>
         <nz-form-control>
           <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-user">
-            <input nz-input formControlName="userName" placeholder="username: admin or user">
+            <input nz-input formControlName="userName" placeholder="用户名">
           </nz-input-group>
           <nz-form-explain *ngIf="userName.dirty && userName.errors">
-            请输入帐号！
+            帐号不合法！（4-6字符之间）
           </nz-form-explain>
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-control>
           <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-lock">
-            <input nz-input type="password" formControlName="password" placeholder="password: ng-alain.com">
+            <input nz-input type="password" formControlName="password" placeholder="密码">
           </nz-input-group>
           <nz-form-explain *ngIf="password.dirty && password.errors">
-            请输入密码！
+            密码不合法！（4-6字符之间）
           </nz-form-explain>
         </nz-form-control>
       </nz-form-item>
     </nz-tab>
-    <nz-tab [nzTitle]="'手机号登录'">
+    <!-- <nz-tab [nzTitle]="'手机号登录'">
       <nz-form-item>
         <nz-form-control>
           <nz-input-group nzSize="large" nzPrefixIcon="anticon anticon-user">
@@ -66,7 +66,7 @@
           </nz-row>
         </nz-form-control>
       </nz-form-item>
-    </nz-tab>
+    </nz-tab> -->
   </nz-tabset>
   <nz-form-item>
     <nz-col [nzSpan]="12">

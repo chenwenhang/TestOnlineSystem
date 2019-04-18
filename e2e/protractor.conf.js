@@ -1,3 +1,10 @@
+/*
+ * @Author: Chen Wenhang
+ * @Description: 
+ * @Github: https://github.com/chenwenhang
+ * @Date: 2018-12-29 19:56:56
+ * @LastEditTime: 2019-04-18 16:17:35
+ */
 // Protractor configuration file, see link for more information
 // https://github.com/angular/protractor/blob/master/lib/config.ts
 

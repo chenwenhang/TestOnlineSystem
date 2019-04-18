@@ -7,7 +7,7 @@ import { MenuService, SettingsService, TitleService, ALAIN_I18N_TOKEN } from '@d
 import { DA_SERVICE_TOKEN, ITokenService } from '@delon/auth';
 import { ACLService } from '@delon/acl';
 
-import { NzIconService } from 'ng-zorro-antd';
+import { NzIconService, NzMessageService } from 'ng-zorro-antd';
 import { ICONS_AUTO } from '../../../style-icons-auto';
 import { ICONS } from '../../../style-icons';
 
@@ -61,28 +61,32 @@ export class StartupService {
   }
 
   private viaMock(resolve: any, reject: any) {
-    // const tokenData = this.tokenService.get();
-    // if (!tokenData.token) {
-    //   this.injector.get(Router).navigateByUrl('/passport/login');
-    //   resolve({});
-    //   return;
-    // }
+    const tokenData = this.tokenService.get();
+    // console.log(tokenData);
+    if (!tokenData.token) {
+      this.injector.get(Router).navigateByUrl('/passport/login');
+      resolve({});
+      return;
+    }
     // mock
     const app: any = {
       name: `ng-alain`,
       description: `Ng-zorro admin panel front-end framework`
     };
-    const user: any = {
-      name: 'Admin',
-      avatar: './assets/tmp/img/avatar.jpg',
-      email: 'cipchk@qq.com',
-      power: 1,
-      token: '123456789'
-    };
+    // const user: any = {
+    //   name: 'Admin',
+    //   avatar: './assets/tmp/img/avatar.jpg',
+    //   email: 'cipchk@qq.com',
+    //   power: 1,
+    //   token: '123456789'
+    // };
     // 应用信息：包括站点名、描述、年份
+    tokenData.name=tokenData.nickname;
+    tokenData.avatar='./assets/tmp/img/avatar.jpg';
+
     this.settingService.setApp(app);
     // 用户信息：包括姓名、头像、邮箱地址
-    this.settingService.setUser(user);
+    this.settingService.setUser(tokenData);
     // ACL：设置权限为全量
     this.aclService.setFull(true);
     // 初始化菜单
@@ -116,7 +120,7 @@ export class StartupService {
       {
         text: '内容发布端',
         group: true,
-        hide: user.power <= 2 ? false : true,
+        hide: tokenData.power <= 2 ? false : true,
         children: [
           {
             text: '试题管理',
@@ -133,26 +137,27 @@ export class StartupService {
             text: '职业管理',
             link: '/manage/occupation-manage',
             icon: { type: 'icon', value: 'rocket' },
-            hide: user.power <= 1 ? false : true,
+            hide: tokenData.power <= 1 ? false : true,
             shortcutRoot: true
           },
           {
             text: '标签管理',
             link: '/manage/tag-manage',
             icon: { type: 'icon', value: 'tags' },
-            hide: user.power <= 1 ? false : true,
+            hide: tokenData.power <= 1 ? false : true,
             shortcutRoot: true
           },
           {
             text: '用户管理',
             link: '/manage/user-manage',
             icon: { type: 'icon', value: 'user' },
-            hide: user.power <= 1 ? false : true,
+            hide: tokenData.power <= 1 ? false : true,
             shortcutRoot: true
           }
         ]
       }
     ]);
+
     // 设置页面标题的后缀
     this.titleService.suffix = app.name;
     // if(true){
@@ -170,6 +175,7 @@ export class StartupService {
       // this.viaHttp(resolve, reject);
       // mock：请勿在生产环境中这么使用，viaMock 单纯只是为了模拟一些数据使脚手架一开始能正常运行
       this.viaMock(resolve, reject);
+
 
     });
   }
