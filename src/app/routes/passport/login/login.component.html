@@ -3,7 +3,7 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2018-12-29 20:01:43
- * @LastEditTime: 2019-04-18 20:43:39
+ * @LastEditTime: 2019-04-19 10:21:39
  -->
 <form nz-form [formGroup]="form" (ngSubmit)="submit()" role="form">
   <nz-tabset [nzAnimated]="false" class="tabs" (nzSelectChange)="switch($event)">
@@ -37,13 +37,12 @@
             <input nz-input formControlName="mobile" placeholder="mobile number">
           </nz-input-group>
           <nz-form-explain *ngIf="mobile.dirty && mobile.errors">
-            <!-- <ng-container *ngIf="mobile.errors.required">
+            <ng-container *ngIf="mobile.errors.required">
               请输入手机号！
             </ng-container>
             <ng-container *ngIf="mobile.errors.pattern">
               手机号格式错误！
-            </ng-container> -->
-            手机号格式错误！
+            </ng-container>
           </nz-form-explain>
         </nz-form-control>
       </nz-form-item>

@@ -29,7 +29,8 @@ import {
   TagsOutline,
   RocketOutline,
   FolderOutline,
-  FileTextOutline
+  FileTextOutline,
+  InfoOutline
 } from '@ant-design/icons-angular/icons';
 
 export const ICONS_AUTO = [
@@ -58,5 +59,6 @@ export const ICONS_AUTO = [
   WeiboCircleOutline,
   TagsOutline,
   FolderOutline,
-  FileTextOutline
+  FileTextOutline,
+  InfoOutline
 ];

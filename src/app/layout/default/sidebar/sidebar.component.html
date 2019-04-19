@@ -3,20 +3,20 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2018-12-29 20:01:43
- * @LastEditTime: 2019-04-18 18:39:50
+ * @LastEditTime: 2019-04-19 17:19:40
  -->
 <div class="alain-default__aside-inner">
   <nz-dropdown nzTrigger="click" class="alain-default__aside-user">
     <div nz-dropdown class="user-block-dropdown">
       <nz-avatar class="alain-default__aside-user-avatar" [nzSrc]="settings.user.avatar"></nz-avatar>
       <div class="alain-default__aside-user-info">
-        <strong>{{settings.user.name}}</strong>
+        <strong>{{settings.user.nickname}}</strong>
         <p class="text-truncate mb0">{{settings.user.email}}</p>
       </div>
     </div>
-    <ul nz-menu>
+    <!-- <ul nz-menu>
       <li nz-menu-item routerLink="/client/userinfo">个人中心</li>
-    </ul>
+    </ul> -->
   </nz-dropdown>
   <sidebar-nav class="d-block py-lg"></sidebar-nav>
 </div>

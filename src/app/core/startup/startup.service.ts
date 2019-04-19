@@ -81,7 +81,6 @@ export class StartupService {
     //   token: '123456789'
     // };
     // 应用信息：包括站点名、描述、年份
-    tokenData.name=tokenData.nickname;
     tokenData.avatar='./assets/tmp/img/avatar.jpg';
 
     this.settingService.setApp(app);
@@ -114,6 +113,11 @@ export class StartupService {
             text: '我的收藏',
             link: '/client/question-collection',
             icon: { type: 'icon', value: 'star' }
+          },
+          {
+            text: '我的信息',
+            link: '/client/userinfo',
+            icon: { type: 'icon', value: 'info' }
           }
         ]
       },
