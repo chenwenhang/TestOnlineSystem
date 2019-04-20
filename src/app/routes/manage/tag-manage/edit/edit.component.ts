@@ -12,27 +12,17 @@ export class ManageTagManageEditComponent implements OnInit {
   i: any;
   schema: SFSchema = {
     properties: {
-      no: { type: 'string', title: '编号' },
-      owner: { type: 'string', title: '姓名', maxLength: 15 },
-      callNo: { type: 'number', title: '调用次数' },
-      href: { type: 'string', title: '链接', format: 'uri' },
-      description: { type: 'string', title: '描述', maxLength: 140 },
+      tag: { type: 'string', title: '标签名', maxLength: 15 },
     },
-    required: ['owner', 'callNo', 'href', 'description'],
+    required: ['tag'],
   };
   ui: SFUISchema = {
     '*': {
       spanLabelFixed: 100,
       grid: { span: 12 },
     },
-    $no: {
-      widget: 'text'
-    },
-    $href: {
+    $tag: {
       widget: 'string',
-    },
-    $description: {
-      widget: 'textarea',
       grid: { span: 24 },
     },
   };
@@ -41,18 +31,34 @@ export class ManageTagManageEditComponent implements OnInit {
     private modal: NzModalRef,
     private msgSrv: NzMessageService,
     public http: _HttpClient,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    if (this.record.id > 0)
-    this.http.get(`/user/${this.record.id}`).subscribe(res => (this.i = res));
+    
   }
 
   save(value: any) {
-    this.http.post(`/user/${this.record.id}`, value).subscribe(res => {
-      this.msgSrv.success('保存成功');
-      this.modal.close(true);
-    });
+    if (value._id) {
+      this.http.put(`/manage/tag/edit?_allow_anonymous=true`, value).subscribe((res: any) => {
+        if (!res.code) {
+          this.msgSrv.error(res.msg);
+          return;
+        }
+        this.msgSrv.success(res.msg);
+        this.modal.close(true);
+      });
+    }else{
+      delete value._id;
+      this.http.post(`/manage/tag/add?_allow_anonymous=true`, value).subscribe((res: any) => {
+        if (!res.code) {
+          this.msgSrv.error(res.msg);
+          return;
+        }
+        this.msgSrv.success(res.msg);
+        this.modal.close(true);
+      });
+    }
+
   }
 
   close() {

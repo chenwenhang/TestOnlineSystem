@@ -1,33 +1,57 @@
+import { ManageTagManageViewComponent } from './view/view.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { _HttpClient, ModalHelper } from '@delon/theme';
 import { STColumn, STComponent } from '@delon/abc';
 import { SFSchema } from '@delon/form';
+import { ManageTagManageEditComponent } from './edit/edit.component';
 
 @Component({
   selector: 'app-manage-tag-manage',
   templateUrl: './tag-manage.component.html',
 })
 export class ManageTagManageComponent implements OnInit {
-  url = `/user`;
+  url = `/manage/tag?_allow_anonymous=true`;
+  req = {
+    reName: {
+      pi: 'page',
+      ps: 'size'
+    }
+  }
+  res = {
+    reName: {
+      total: 'count',
+      list: 'data'
+    }
+  };
   searchSchema: SFSchema = {
     properties: {
-      no: {
+      tag: {
         type: 'string',
-        title: '编号'
+        title: '标签名'
       }
     }
   };
   @ViewChild('st') st: STComponent;
   columns: STColumn[] = [
-    { title: '编号', index: 'no' },
-    { title: '调用次数', type: 'number', index: 'callNo' },
-    { title: '头像', type: 'img', width: '50px', index: 'avatar' },
-    { title: '时间', type: 'date', index: 'updatedAt' },
+    // { title: '编号', index: '_id' },
+    { title: '标签名', index: 'tag' },
     {
       title: '',
       buttons: [
-        // { text: '查看', click: (item: any) => `/form/${item.id}` },
-        // { text: '编辑', type: 'static', component: FormEditComponent, click: 'reload' },
+        {
+          text: '查看', click: (item: any) => {
+            this.modal
+              .createStatic(ManageTagManageViewComponent, { i: item })
+              .subscribe(() => this.st.reload());
+          }
+        },
+        {
+          text: '编辑', click: (item: any) => {
+            this.modal
+              .createStatic(ManageTagManageEditComponent, { i: item })
+              .subscribe(() => this.st.reload());
+          }
+        },
       ]
     }
   ];
@@ -37,9 +61,9 @@ export class ManageTagManageComponent implements OnInit {
   ngOnInit() { }
 
   add() {
-    // this.modal
-    //   .createStatic(FormEditComponent, { i: { id: 0 } })
-    //   .subscribe(() => this.st.reload());
+    this.modal
+      .createStatic(ManageTagManageEditComponent, { i: { _id: 0 } })
+      .subscribe(() => this.st.reload());
   }
 
 }
