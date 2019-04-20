@@ -1,3 +1,10 @@
+<!--
+ * @Author: Chen Wenhang
+ * @Description: 
+ * @Github: https://github.com/chenwenhang
+ * @Date: 2019-04-03 23:21:32
+ * @LastEditTime: 2019-04-20 21:49:41
+ -->
 <page-header [action]="phActionTpl">
   <ng-template #phActionTpl>
     <button (click)="add()" nz-button nzType="primary">新建</button>
@@ -5,5 +12,5 @@
 </page-header>
 <nz-card>
   <sf mode="search" [schema]="searchSchema" (formSubmit)="st.reset($event)" (formReset)="st.reset($event)"></sf>
-  <st #st [data]="url" [columns]="columns"></st>
+  <st #st [data]="url" [columns]="columns" [res]="res" [req]="req" ps="10" [noResult]="'这个表是空的哦~'"></st>
 </nz-card>

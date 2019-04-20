@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 import { SFSchema, SFUISchema } from '@delon/form';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-manage-user-manage-edit',
@@ -10,29 +12,55 @@ import { SFSchema, SFUISchema } from '@delon/form';
 export class ManageUserManageEditComponent implements OnInit {
   record: any = {};
   i: any;
+  occupation = [];
   schema: SFSchema = {
     properties: {
-      no: { type: 'string', title: '编号' },
-      owner: { type: 'string', title: '姓名', maxLength: 15 },
-      callNo: { type: 'number', title: '调用次数' },
-      href: { type: 'string', title: '链接', format: 'uri' },
-      description: { type: 'string', title: '描述', maxLength: 140 },
+      username: { type: 'string', title: '帐号', minLength: 6, maxLength: 15 },
+      nickname: { type: 'string', title: '昵称' },
+      occupation: { type: 'string', title: '职业' },
+      email: { type: 'string', title: '邮箱', format: 'email' },
+      power: {
+        type: 'string',
+        title: '权限',
+        enum: [
+          { label: '管理员', value: '1' },
+          { label: '发布者', value: '2' },
+          { label: '普通用户', value: '3' }
+        ],
+        default: '3'
+      },
     },
-    required: ['owner', 'callNo', 'href', 'description'],
+    required: ['username', 'nickname', 'occupation', 'email', 'power'],
   };
   ui: SFUISchema = {
     '*': {
       spanLabelFixed: 100,
       grid: { span: 12 },
     },
-    $no: {
-      widget: 'text'
-    },
-    $href: {
+    $username: {
       widget: 'string',
+      grid: { span: 24 },
     },
-    $description: {
-      widget: 'textarea',
+    $nickname: {
+      widget: 'string',
+      grid: { span: 24 },
+    },
+    $occupation: {
+      widget: 'select',
+      grid: { span: 24 },
+      asyncData: () => of([
+        {
+          label: '选择职业',
+          group: true,
+          children: this.occupation
+        }]).pipe(delay(1200))
+    },
+    $email: {
+      widget: 'string',
+      grid: { span: 24 },
+    },
+    $power: {
+      widget: 'select',
       grid: { span: 24 },
     },
   };
@@ -41,18 +69,39 @@ export class ManageUserManageEditComponent implements OnInit {
     private modal: NzModalRef,
     private msgSrv: NzMessageService,
     public http: _HttpClient,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    if (this.record.id > 0)
-    this.http.get(`/user/${this.record.id}`).subscribe(res => (this.i = res));
+    this.http.get(`/manage/occupation?_allow_anonymous=true`).subscribe((res: any) => {
+      for (let i = 0; i < res.data.length; i++) {
+        let tmp = res.data[i].occupation;
+        this.occupation.push({ label: tmp, value: tmp });
+      }
+      // console.log(this.occupation);
+    })
   }
 
   save(value: any) {
-    this.http.post(`/user/${this.record.id}`, value).subscribe(res => {
-      this.msgSrv.success('保存成功');
-      this.modal.close(true);
-    });
+    if (value._id) {
+      this.http.put(`/manage/user/edit?_allow_anonymous=true`, value).subscribe((res: any) => {
+        if (!res.code) {
+          this.msgSrv.error(res.msg);
+          return;
+        }
+        this.msgSrv.success(res.msg);
+        this.modal.close(true);
+      });
+    } else {
+      delete value._id;
+      this.http.post(`/manage/user/add?_allow_anonymous=true`, value).subscribe((res: any) => {
+        if (!res.code) {
+          this.msgSrv.error(res.msg);
+          return;
+        }
+        this.msgSrv.success(res.msg);
+        this.modal.close(true);
+      });
+    }
   }
 
   close() {
