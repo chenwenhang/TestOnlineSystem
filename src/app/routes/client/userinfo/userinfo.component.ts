@@ -33,10 +33,10 @@ export class ClientUserinfoComponent implements OnInit {
     // console.log(this.user);
     this.http.put('/manage/user/edit?_allow_anonymous=true', this.user).subscribe((res: any) => {
       if (!res.code) {
-        alert(res.msg);
+        this.msg.success(res.msg);
         return;
       }
-      alert('修改成功！');
+      this.msg.success(res.msg);
     });
   }
 
