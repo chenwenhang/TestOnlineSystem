@@ -4,6 +4,7 @@ import { _HttpClient, ModalHelper } from '@delon/theme';
 import { STColumn, STComponent } from '@delon/abc';
 import { SFSchema } from '@delon/form';
 import { ManageTagManageEditComponent } from './edit/edit.component';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-manage-tag-manage',
@@ -39,24 +40,39 @@ export class ManageTagManageComponent implements OnInit {
       title: '',
       buttons: [
         {
-          text: '查看', click: (item: any) => {
+          text: '查看',
+          icon: 'zoom-in',
+          click: (item: any) => {
             this.modal
               .createStatic(ManageTagManageViewComponent, { i: item })
               .subscribe(() => this.st.reload());
           }
         },
         {
-          text: '编辑', click: (item: any) => {
+          text: '编辑',
+          icon: 'edit',
+          click: (item: any) => {
             this.modal
               .createStatic(ManageTagManageEditComponent, { i: item })
               .subscribe(() => this.st.reload());
+          }
+        },
+        {
+          text: '删除',
+          icon: 'delete',
+          click: (item: any) => {
+            this.delete(item)
           }
         },
       ]
     }
   ];
 
-  constructor(private http: _HttpClient, private modal: ModalHelper) { }
+  constructor(
+    private http: _HttpClient, 
+    private modal: ModalHelper,
+    private msgSrv: NzMessageService,    
+    ) { }
 
   ngOnInit() { }
 
@@ -64,6 +80,18 @@ export class ManageTagManageComponent implements OnInit {
     this.modal
       .createStatic(ManageTagManageEditComponent, { i: { _id: 0 } })
       .subscribe(() => this.st.reload());
+  }
+
+  delete(item: any) {
+    console.log(item)
+    this.http.delete(`/manage/tag/delete?_allow_anonymous=true`, item).subscribe((res: any) => {
+      if (!res.code) {
+        this.msgSrv.error(res.msg);
+        return;
+      }
+      this.msgSrv.success(res.msg);
+      this.st.reload();
+    })
   }
 
 }

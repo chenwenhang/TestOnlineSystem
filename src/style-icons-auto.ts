@@ -30,7 +30,10 @@ import {
   RocketOutline,
   FolderOutline,
   FileTextOutline,
-  InfoOutline
+  InfoOutline,
+  ZoomInOutline,
+  EditOutline,
+  DeleteOutline
 } from '@ant-design/icons-angular/icons';
 
 export const ICONS_AUTO = [
@@ -60,5 +63,8 @@ export const ICONS_AUTO = [
   TagsOutline,
   FolderOutline,
   FileTextOutline,
-  InfoOutline
+  InfoOutline,
+  ZoomInOutline,
+  EditOutline,
+  DeleteOutline
 ];
