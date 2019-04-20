@@ -83,7 +83,6 @@ export class ManageTagManageComponent implements OnInit {
   }
 
   delete(item: any) {
-    console.log(item)
     this.http.delete(`/manage/tag/delete?_allow_anonymous=true`, item).subscribe((res: any) => {
       if (!res.code) {
         this.msgSrv.error(res.msg);
