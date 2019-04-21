@@ -70,8 +70,8 @@ export class StartupService {
     }
     // mock
     const app: any = {
-      name: `ng-alain`,
-      description: `Ng-zorro admin panel front-end framework`
+      name: `IT教育课程考评系统`,
+      description: `基于 Angular, Ng Alain, NodeJS, MongoDB 的IT教育课程考评系统`
     };
     // const user: any = {
     //   name: 'Admin',
