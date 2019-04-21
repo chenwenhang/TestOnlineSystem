@@ -3,55 +3,16 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2019-04-19 14:31:52
- * @LastEditTime: 2019-04-20 15:39:57
+ * @LastEditTime: 2019-04-21 23:06:49
  -->
 <page-header [action]="phActionTpl">
   <ng-template #phActionTpl>
   </ng-template>
 </page-header>
 <nz-card>
-  <form nz-form>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="5">帐号：</nz-form-label>
-      <nz-form-control [nzSpan]="12">
-        <input nz-input [ngModel]="user.username" name="username" disabled />
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="5">邮箱：</nz-form-label>
-      <nz-form-control [nzSpan]="12">
-        <input nz-input [(ngModel)]="user.email" name="email" />
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="5">昵称：</nz-form-label>
-      <nz-form-control [nzSpan]="12">
-        <input nz-input [(ngModel)]="user.nickname" name="nickname" />
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="5">职业：</nz-form-label>
-      <nz-form-control [nzSpan]="12">
-        <nz-select [(ngModel)]="user.occupation" nzPlaceHolder="occupation" name="occupation">
-            <nz-option *ngFor="let option of occupation" [nzValue]="option" [nzLabel]="option"></nz-option>
-        </nz-select>
-      </nz-form-control>
-    </nz-form-item>
-    <nz-form-item>
-      <nz-form-label [nzSpan]="5"></nz-form-label>
-      <nz-form-control [nzSpan]="2">
-        <button nz-button type="button" (click)="saveInfomation()" nzType="primary" nzSize="large"  [nzLoading]="http.loading" nzBlock>
-          保存
-        </button>
-      </nz-form-control>
-      <nz-form-control [nzSpan]="1">
-      </nz-form-control>
-      <nz-form-control [nzSpan]="4">
-        <button nz-button type="button" (click)="forget()" nzType="primary" nzSize="large" nzBlock>
-          忘记密码
-        </button>
-      </nz-form-control>
-    </nz-form-item>
-  </form>
-
+  <sf *ngIf="user" #sf mode="edit" button="none" [schema]="schema" [ui]="ui" [formData]="user">
+    <div nz-col nzSpan="2"></div>
+    <button nz-button type="submit" nzType="primary" (click)="save(sf.value)" [disabled]="!sf.valid"
+      [nzLoading]="http.loading">保存信息</button>
+  </sf>
 </nz-card>

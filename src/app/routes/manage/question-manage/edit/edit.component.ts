@@ -97,7 +97,7 @@ export class ManageQuestionManageEditComponent implements OnInit {
           label: '选择标签',
           group: true,
           children: this.tag
-        }]).pipe(delay(1200)),
+        }]),
       default: null,
       maxMultipleCount: 3
     },

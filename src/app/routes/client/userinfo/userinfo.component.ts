@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { _HttpClient } from '@delon/theme';
 import { NzMessageService } from 'ng-zorro-antd';
+import { SFSchema, SFUISchema, SFButton } from '@delon/form';
+import { delay } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-client-userinfo',
@@ -9,6 +13,54 @@ import { NzMessageService } from 'ng-zorro-antd';
 export class ClientUserinfoComponent implements OnInit {
   user = JSON.parse(localStorage.getItem('user'));
   occupation = [];
+  schema: SFSchema = {
+    properties: {
+      avatar: {
+        type: 'string',
+        title: '头像',
+        ui: {
+          widget: 'upload',
+          action: '/login/upload?_allow_anonymous=true',
+          resReName: 'resource_id',
+          urlReName: 'url',
+          name: this.user._id
+        },
+      },
+      username: { type: 'string', title: '帐号', minLength: 6, maxLength: 15, readOnly: true },
+      nickname: { type: 'string', title: '昵称' },
+      occupation: { type: 'string', title: '职业' },
+      email: { type: 'string', title: '邮箱', format: 'email' },
+    },
+    required: ['username', 'nickname', 'occupation', 'email'],
+  };
+  ui: SFUISchema = {
+    '*': {
+      spanLabelFixed: 100,
+      grid: { span: 12 },
+    },
+    $username: {
+      widget: 'string',
+      grid: { span: 24 },
+    },
+    $nickname: {
+      widget: 'string',
+      grid: { span: 24 },
+    },
+    $occupation: {
+      widget: 'select',
+      grid: { span: 24 },
+      asyncData: () => of([
+        {
+          label: '选择职业',
+          group: true,
+          children: this.occupation
+        }])
+    },
+    $email: {
+      widget: 'string',
+      grid: { span: 24 },
+    },
+  };
   constructor(
     public http: _HttpClient,
     public msg: NzMessageService,
@@ -19,24 +71,27 @@ export class ClientUserinfoComponent implements OnInit {
 
   ngOnInit() {
     // delete this.user.occupation;
-    this.http.get('/manage/occupation?_allow_anonymous=true').subscribe((res: any) => {
+    this.http.get(`/manage/occupation?_allow_anonymous=true`).subscribe((res: any) => {
       for (let i = 0; i < res.data.length; i++) {
         let tmp = res.data[i].occupation;
-        this.occupation.push(tmp);
+        this.occupation.push({ label: tmp, value: tmp });
       }
-    });
-
-
+      // console.log(this.occupation);
+    })
+    this.http.get(`/manage/user/detail?_allow_anonymous=true&_id=${this.user._id}`).subscribe((res: any) => {
+      this.user = res.data;
+    })
   }
 
-  saveInfomation() {
-    // console.log(this.user);
-    this.http.put('/manage/user/edit?_allow_anonymous=true', this.user).subscribe((res: any) => {
+  save(value: any) {
+    // console.log(value);
+    this.http.put('/manage/user/edit?_allow_anonymous=true', value).subscribe((res: any) => {
       if (!res.code) {
-        this.msg.success(res.msg);
+        this.msg.error(res.msg);
         return;
       }
       this.msg.success(res.msg);
+
     });
   }
 
