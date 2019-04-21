@@ -17,7 +17,7 @@ export class ManageQuestionManageViewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.http.get(`/user/${this.record.id}`).subscribe(res => this.i = res);
+    
   }
 
   close() {
