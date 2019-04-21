@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 import { SFSchema, SFUISchema } from '@delon/form';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-manage-occupation-manage-edit',
@@ -10,30 +12,35 @@ import { SFSchema, SFUISchema } from '@delon/form';
 export class ManageOccupationManageEditComponent implements OnInit {
   record: any = {};
   i: any;
+  tag = [];
   schema: SFSchema = {
     properties: {
-      no: { type: 'string', title: '编号' },
-      owner: { type: 'string', title: '姓名', maxLength: 15 },
-      callNo: { type: 'number', title: '调用次数' },
-      href: { type: 'string', title: '链接', format: 'uri' },
-      description: { type: 'string', title: '描述', maxLength: 140 },
+      occupation: { type: 'string', title: '职业' },
+      tag: { type: 'string', title: '标签' },
     },
-    required: ['owner', 'callNo', 'href', 'description'],
+    required: ['occupation', 'tag'],
   };
   ui: SFUISchema = {
     '*': {
       spanLabelFixed: 100,
       grid: { span: 12 },
     },
-    $no: {
-      widget: 'text'
-    },
-    $href: {
+    $occupation: {
       widget: 'string',
-    },
-    $description: {
-      widget: 'textarea',
       grid: { span: 24 },
+    },
+    $tag: {
+      widget: 'select',
+      mode: 'tags',
+      grid: { span: 24 },
+      asyncData: () => of([
+        {
+          label: '选择标签',
+          group: true,
+          children: this.tag
+        }]).pipe(delay(1200)),
+      default: null,
+      maxMultipleCount:3
     },
   };
 
@@ -41,18 +48,40 @@ export class ManageOccupationManageEditComponent implements OnInit {
     private modal: NzModalRef,
     private msgSrv: NzMessageService,
     public http: _HttpClient,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    if (this.record.id > 0)
-    this.http.get(`/user/${this.record.id}`).subscribe(res => (this.i = res));
+    this.http.get(`/manage/tag?_allow_anonymous=true`).subscribe((res: any) => {
+      for (let i = 0; i < res.data.length; i++) {
+        let tmp = res.data[i].tag;
+        this.tag.push({ label: tmp, value: tmp });
+      }
+      // console.log(this.tag);
+    })
   }
 
   save(value: any) {
-    this.http.post(`/user/${this.record.id}`, value).subscribe(res => {
-      this.msgSrv.success('保存成功');
-      this.modal.close(true);
-    });
+    if (value._id) {
+      this.http.put(`/manage/occupation/edit?_allow_anonymous=true`, value).subscribe((res: any) => {
+        if (!res.code) {
+          this.msgSrv.error(res.msg);
+          return;
+        }
+        this.msgSrv.success(res.msg);
+        this.modal.close(true);
+      });
+    } else {
+      delete value._id;
+      // console.log(value);     
+      this.http.post(`/manage/occupation/add?_allow_anonymous=true`, value).subscribe((res: any) => {
+        if (!res.code) {
+          this.msgSrv.error(res.msg);
+          return;
+        }
+        this.msgSrv.success(res.msg);
+        this.modal.close(true);
+      });
+    }
   }
 
   close() {
