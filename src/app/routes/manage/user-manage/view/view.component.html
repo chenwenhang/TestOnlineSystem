@@ -3,13 +3,13 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2019-04-03 23:21:32
- * @LastEditTime: 2019-04-20 22:05:19
+ * @LastEditTime: 2019-04-21 16:04:21
  -->
 <div class="modal-header">
   <div class="modal-title">查看信息</div>
 </div>
 <nz-spin *ngIf="!i" class="modal-spin"></nz-spin>
-<div sv-container *ngIf="i">
+<div sv-container *ngIf="i" [col]="1">
   <sv label="帐号">{{ i.username }}</sv>
   <sv label="昵称">{{ i.nickname }}</sv>
   <sv label="职业">{{ i.occupation }}</sv>

@@ -3,13 +3,13 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2019-04-17 22:02:37
- * @LastEditTime: 2019-04-21 15:01:24
+ * @LastEditTime: 2019-04-21 16:04:34
  -->
 <div class="modal-header">
   <div class="modal-title">查看信息</div>
 </div>
 <nz-spin *ngIf="!i" class="modal-spin"></nz-spin>
-<div sv-container *ngIf="i">
+<div sv-container *ngIf="i" [col]="1">
   <sv label="职业名">{{ i.occupation }}</sv>
   <sv label="标签">
     <nz-tag [nzColor]="'#87d068'" *ngFor="let item of i.tag">{{item}}</nz-tag>
