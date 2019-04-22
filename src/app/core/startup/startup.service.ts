@@ -100,14 +100,21 @@ export class StartupService {
         group: true,
         children: [
           {
-            text: '模拟考试',
-            link: '/client/mock-exam',
-            icon: { type: 'icon', value: 'file' }
-          },
-          {
-            text: '正式考试',
-            link: '/client/formal-exam',
-            icon: { type: 'icon', value: 'file-text' }
+            text: '开始考试',
+            icon: { type: 'icon', value: 'file' },
+            group: true,
+            children: [
+              {
+                text: '模拟考试',
+                link: '/client/mock-exam',
+                // icon: { type: 'icon', value: 'file' }
+              },
+              {
+                text: '正式考试',
+                link: '/client/formal-exam',
+                // icon: { type: 'icon', value: 'file-text' }
+              },
+            ]
           },
           {
             text: '考试记录',
@@ -123,6 +130,11 @@ export class StartupService {
             text: '我的信息',
             link: '/client/userinfo',
             icon: { type: 'icon', value: 'info' }
+          },
+          {
+            text: '数据分析',
+            link: '/client/data-analysis',
+            icon: { type: 'icon', value: 'cloud' }
           }
         ]
       },

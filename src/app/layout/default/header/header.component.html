@@ -3,12 +3,14 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2018-12-29 20:01:43
- * @LastEditTime: 2019-04-18 18:41:46
+ * @LastEditTime: 2019-04-22 23:38:26
  -->
 <div class="alain-default__header-logo">
   <a [routerLink]="['/']" class="alain-default__header-logo-link">
-    <img class="alain-default__header-logo-expanded" src="./assets/logo-full.svg" alt="{{settings.app.name}}" style="max-height:40px;" />
-    <img class="alain-default__header-logo-collapsed" src="./assets/logo.svg" alt="{{settings.app.name}}" style="max-height:30px;" />
+    <img class="alain-default__header-logo-expanded" src="./assets/logo-full.svg" alt="{{settings.app.name}}"
+      style="max-height:40px;" />
+    <img class="alain-default__header-logo-collapsed" src="./assets/logo.svg" alt="{{settings.app.name}}"
+      style="max-height:30px;" />
   </a>
 </div>
 <div class="alain-default__nav-wrap">
@@ -17,6 +19,18 @@
     <li>
       <div class="alain-default__nav-item" (click)="toggleCollapsedSidebar()">
         <i nz-icon type="menu-{{settings.layout.collapsed ? 'unfold' : 'fold'}}"></i>
+      </div>
+    </li>
+    <!-- Github Page -->
+    <li>
+      <a class="alain-default__nav-item" href="//github.com/chenwenhang" target="_blank">
+        <i nz-icon type="github"></i>
+      </a>
+    </li>
+    <!-- Lock Page -->
+    <li class="hidden-mobile">
+      <div class="alain-default__nav-item" routerLink="/passport/lock">
+        <i nz-icon type="lock"></i>
       </div>
     </li>
     <!-- Search Button -->
