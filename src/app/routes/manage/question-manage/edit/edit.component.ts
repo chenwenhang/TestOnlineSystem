@@ -36,7 +36,11 @@ export class ManageQuestionManageEditComponent implements OnInit {
           properties: {
             name: {
               type: "string",
-              title: "选项"
+              title: "选项",
+              ui: {
+                widget: 'textarea',
+                autosize: { maxRows: 6 },
+              }
             }
           },
           required: [
@@ -50,7 +54,10 @@ export class ManageQuestionManageEditComponent implements OnInit {
       },
       right: { type: 'string', title: '正确答案' },
       tag: { type: 'string', title: '标签' },
-      explanation: { type: 'string', title: '解析' },
+      explanation: {
+        type: 'string',
+        title: '解析',
+      },
     },
     required: ['type', 'content', 'right', 'tag'],
 
@@ -74,7 +81,8 @@ export class ManageQuestionManageEditComponent implements OnInit {
       grid: { span: 24 },
     },
     $content: {
-      widget: 'string',
+      widget: 'textarea',
+      autosize: { maxRows: 6 },
       grid: { span: 24 },
     },
     $analysis: {
@@ -85,7 +93,8 @@ export class ManageQuestionManageEditComponent implements OnInit {
       grid: { span: 24 },
     },
     $explanation: {
-      widget: 'string',
+      widget: 'textarea',
+      autosize: { maxRows: 6 },
       grid: { span: 24 },
     },
     $tag: {
