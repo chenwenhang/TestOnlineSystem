@@ -1,3 +1,10 @@
+<!--
+ * @Author: Chen Wenhang
+ * @Description: 
+ * @Github: https://github.com/chenwenhang
+ * @Date: 2019-04-17 22:02:22
+ * @LastEditTime: 2019-04-22 18:06:25
+ -->
 <page-header [action]="phActionTpl">
   <ng-template #phActionTpl>
     <button (click)="add()" nz-button nzType="primary">新建</button>
@@ -5,5 +12,18 @@
 </page-header>
 <nz-card>
   <sf mode="search" [schema]="searchSchema" (formSubmit)="st.reset($event)" (formReset)="st.reset($event)"></sf>
-  <st #st [data]="url" [columns]="columns"></st>
+  <st #st [data]="url" [columns]="columns" [res]="res" [req]="req" ps="10" [noResult]="'这个表是空的哦~'">
+    <ng-template st-row="custom1" let-item let-index="index">
+      <nz-tooltip>
+        <nz-tag [nzColor]="'green'" *ngIf="item.is_valid">有效</nz-tag>
+        <nz-tag [nzColor]="'red'" *ngIf="!item.is_valid">禁用</nz-tag>
+      </nz-tooltip>
+    </ng-template>
+    <ng-template st-row="custom2" let-item let-index="index">
+      <nz-tooltip>
+        <nz-tag [nzColor]="'blue'" *ngIf="item.is_public">公开</nz-tag>
+        <nz-tag *ngIf="!item.is_public">私有</nz-tag>
+      </nz-tooltip>
+    </ng-template>
+  </st>
 </nz-card>

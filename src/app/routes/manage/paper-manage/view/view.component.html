@@ -1,14 +1,54 @@
+<!--
+ * @Author: Chen Wenhang
+ * @Description: 
+ * @Github: https://github.com/chenwenhang
+ * @Date: 2019-04-17 22:02:22
+ * @LastEditTime: 2019-04-22 20:59:31
+ -->
 <div class="modal-header">
-  <div class="modal-title">查看 {{ record.id }} 信息</div>
+  <div class="modal-title">查看信息</div>
 </div>
 <nz-spin *ngIf="!i" class="modal-spin"></nz-spin>
-<div sv-container *ngIf="i">
-  <sv label="姓名">{{ i.owner }}</sv>
-  <sv label="会员卡号">32943898021309809423</sv>
-  <sv label="身份证">3321944288191034921</sv>
-  <sv label="联系方式">18112345678</sv>
-  <sv label="联系地址">曲丽丽 18100000000 浙江省杭州市西湖区黄姑山路工专路交叉路口</sv>
+
+<div sv-container *ngIf="i" [col]="1">
+  <sv-title style="text-align: center;font-size: 20px">{{ i.title }}</sv-title>
+
+  <nz-divider nzText="考卷信息"></nz-divider>
+
+  <sv label="考卷概述">{{ i.instructions }}</sv>
+  <sv label="作者">{{ i.create_user }}</sv>
+  <sv label="适用职业">{{ i.occupation }}</sv>
+  <sv label="总分">{{ i.total_mark }}</sv>
+  <sv label="是否有效">
+    <nz-tag [nzColor]="'green'" *ngIf="i.is_valid">有效</nz-tag>
+    <nz-tag [nzColor]="'red'" *ngIf="!i.is_valid">禁用</nz-tag>
+  </sv>
+  <sv label="是否公开">
+    <nz-tag [nzColor]="'blue'" *ngIf="i.is_public">公开</nz-tag>
+    <nz-tag *ngIf="!i.is_public">私有</nz-tag>
+  </sv>
+  <sv label="考试开始">{{ i.start_time }}</sv>
+  <sv label="考试结束">{{ i.end_time }}</sv>
+
+  <div nz-col nzSpan="24" *ngFor="let item of i.questions;let index=index">
+    <nz-divider nzText="第{{index+1}}题"></nz-divider>
+    <sv label="类型">{{ item.type }}</sv>
+    <sv label="题干">{{ item.content }}</sv>
+    <div *ngIf="item.type=='单选题'||item.type=='多选题'||item.type=='排序题'">
+      <sv label="选项 {{index+1}}" *ngFor="let j of item.analysis;let index=index">{{ j }}</sv>
+    </div>
+    <sv label="答案">{{ item.right }}</sv>
+    <sv label="分值">{{ item.score }}</sv>
+    <sv label="解析">{{ item.explanation }}</sv>
+    <sv label="标签">
+      <nz-tag [nzColor]="'#87d068'" *ngFor="let k of item.tag">{{ k }}</nz-tag>
+    </sv>
+    <!-- <sv label="创建时间">{{ item.create_time }}</sv> -->
+  </div>
+
+
 </div>
+
 <div class="modal-footer">
   <button nz-button type="button" (click)="close()">关闭</button>
 </div>
