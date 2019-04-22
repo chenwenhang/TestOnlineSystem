@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { _HttpClient } from '@delon/theme';
 import { NzMessageService } from 'ng-zorro-antd';
-import { SFSchema, SFUISchema, SFButton } from '@delon/form';
+import { SFSchema, SFUISchema, SFButton, SFComponent } from '@delon/form';
 import { delay } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
@@ -13,6 +13,7 @@ import { HttpHeaders } from '@angular/common/http';
 export class ClientUserinfoComponent implements OnInit {
   user = JSON.parse(localStorage.getItem('user'));
   occupation = [];
+  @ViewChild('sf') sf: SFComponent;
   schema: SFSchema = {
     properties: {
       avatar: {
@@ -28,7 +29,7 @@ export class ClientUserinfoComponent implements OnInit {
       },
       username: { type: 'string', title: '帐号', minLength: 6, maxLength: 15, readOnly: true },
       nickname: { type: 'string', title: '昵称' },
-      occupation: { type: 'string', title: '职业' },
+      occupation: { type: 'string', title: '职业', enum: [] },
       email: { type: 'string', title: '邮箱', format: 'email' },
     },
     required: ['username', 'nickname', 'occupation', 'email'],
@@ -49,12 +50,6 @@ export class ClientUserinfoComponent implements OnInit {
     $occupation: {
       widget: 'select',
       grid: { span: 24 },
-      asyncData: () => of([
-        {
-          label: '选择职业',
-          group: true,
-          children: this.occupation
-        }])
     },
     $email: {
       widget: 'string',
@@ -76,7 +71,8 @@ export class ClientUserinfoComponent implements OnInit {
         let tmp = res.data[i].occupation;
         this.occupation.push({ label: tmp, value: tmp });
       }
-      // console.log(this.occupation);
+      this.schema.properties.occupation.enum = this.occupation;
+      this.sf.refreshSchema();
     })
     this.http.get(`/manage/user/detail?_allow_anonymous=true&_id=${this.user._id}`).subscribe((res: any) => {
       this.user = res.data;

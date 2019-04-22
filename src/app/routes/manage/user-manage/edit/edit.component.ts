@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
-import { SFSchema, SFUISchema } from '@delon/form';
+import { SFSchema, SFUISchema, SFComponent } from '@delon/form';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
@@ -13,11 +13,12 @@ export class ManageUserManageEditComponent implements OnInit {
   record: any = {};
   i: any;
   occupation = [];
+  @ViewChild('sf') sf: SFComponent;
   schema: SFSchema = {
     properties: {
       username: { type: 'string', title: '帐号', minLength: 6, maxLength: 15 },
       nickname: { type: 'string', title: '昵称' },
-      occupation: { type: 'string', title: '职业' },
+      occupation: { type: 'string', title: '职业',enum: [] },
       email: { type: 'string', title: '邮箱', format: 'email' },
       power: {
         type: 'string',
@@ -48,12 +49,12 @@ export class ManageUserManageEditComponent implements OnInit {
     $occupation: {
       widget: 'select',
       grid: { span: 24 },
-      asyncData: () => of([
-        {
-          label: '选择职业',
-          group: true,
-          children: this.occupation
-        }]).pipe(delay(1200))
+      // asyncData: () => of([
+      //   {
+      //     label: '选择职业',
+      //     group: true,
+      //     children: this.occupation
+      //   }]).pipe(delay(1200))
     },
     $email: {
       widget: 'string',
@@ -77,6 +78,8 @@ export class ManageUserManageEditComponent implements OnInit {
         let tmp = res.data[i].occupation;
         this.occupation.push({ label: tmp, value: tmp });
       }
+      this.schema.properties.occupation.enum = this.occupation;
+      this.sf.refreshSchema();
       // console.log(this.occupation);
     })
   }
