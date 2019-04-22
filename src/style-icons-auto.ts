@@ -33,7 +33,8 @@ import {
   InfoOutline,
   ZoomInOutline,
   EditOutline,
-  DeleteOutline
+  DeleteOutline,
+  PlusOutline
 } from '@ant-design/icons-angular/icons';
 
 export const ICONS_AUTO = [
@@ -66,5 +67,6 @@ export const ICONS_AUTO = [
   InfoOutline,
   ZoomInOutline,
   EditOutline,
-  DeleteOutline
+  DeleteOutline,
+  PlusOutline
 ];

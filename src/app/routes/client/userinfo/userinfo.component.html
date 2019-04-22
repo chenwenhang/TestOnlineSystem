@@ -3,16 +3,73 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2019-04-19 14:31:52
- * @LastEditTime: 2019-04-22 10:21:28
+ * @LastEditTime: 2019-04-22 16:59:44
  -->
 <page-header [action]="phActionTpl">
   <ng-template #phActionTpl>
   </ng-template>
 </page-header>
 <nz-card>
-  <sf *ngIf="user" #sf mode="edit" button="none" [schema]="schema" [ui]="ui" [formData]="user">
+  <!-- <sf *ngIf="user" #sf mode="edit" button="none" [schema]="schema" [ui]="ui" [formData]="user">
     <div nz-col nzSpan="2"></div>
     <button nz-button type="submit" nzType="primary" (click)="save(sf.value)" [disabled]="!sf.valid"
       [nzLoading]="http.loading">保存信息</button>
-  </sf>
+  </sf> -->
+
+  <form nz-form>
+    <nz-form-item>
+      <div nz-col nzSpan="5"></div>
+      <nz-upload nzAction="http://localhost:3000/login/upload?_allow_anonymous=true" nzName="{{user._id}}"
+        nzListType="picture-card" [nzShowUploadList]="false" [nzBeforeUpload]="beforeUpload"
+        (nzChange)="handleChange($event)">
+        <ng-container *ngIf="!user.avatar">
+          <div class="ant-upload-text">上传头像</div>
+        </ng-container>
+        <img *ngIf="user.avatar" [src]="user.avatar" class="avatar"
+          style="width: 128px;height: 128px;" />
+      </nz-upload>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5">帐号</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <input nz-input [ngModel]="user.username" name="username" disabled />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5">邮箱</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <input nz-input [(ngModel)]="user.email" name="email" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5">昵称</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <input nz-input [(ngModel)]="user.nickname" name="nickname" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5">职业</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        <nz-select [(ngModel)]="user.occupation" nzPlaceHolder="occupation" name="occupation">
+          <nz-option *ngFor="let option of occupation" [nzValue]="option" [nzLabel]="option"></nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5"></nz-form-label>
+      <nz-form-control [nzSpan]="4">
+        <button nz-button type="button" (click)="save()" nzType="primary" nzSize="large" [nzLoading]="http.loading"
+          nzBlock>
+          保存信息
+        </button>
+      </nz-form-control>
+      <nz-form-control [nzSpan]="1">
+      </nz-form-control>
+      <nz-form-control [nzSpan]="4">
+        <button nz-button type="button" (click)="forget()" nzType="primary" nzSize="large" nzBlock>
+          忘记密码
+        </button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
 </nz-card>

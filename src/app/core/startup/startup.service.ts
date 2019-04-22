@@ -60,6 +60,10 @@ export class StartupService {
       });
   }
 
+  public setUser(user: any) {
+    this.settingService.setUser(user);
+  }
+
   private viaMock(resolve: any, reject: any) {
     const tokenData = this.tokenService.get();
     // console.log(tokenData);
@@ -81,7 +85,8 @@ export class StartupService {
     //   token: '123456789'
     // };
     // 应用信息：包括站点名、描述、年份
-    tokenData.avatar='./assets/tmp/img/avatar.jpg';
+    // tokenData.avatar='./assets/tmp/img/avatar.jpg';
+    // console.log(tokenData);
 
     this.settingService.setApp(app);
     // 用户信息：包括姓名、头像、邮箱地址
