@@ -3,10 +3,10 @@ import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 
 @Component({
-  selector: 'app-client-formal-exam-view',
+  selector: 'app-client-start-exam-view',
   templateUrl: './view.component.html',
 })
-export class ClientFormalExamViewComponent implements OnInit {
+export class ClientStartExamViewComponent implements OnInit {
   record: any = {};
   i: any;
 
@@ -17,7 +17,7 @@ export class ClientFormalExamViewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    
+    this.http.get(`/user/${this.record.id}`).subscribe(res => this.i = res);
   }
 
   close() {

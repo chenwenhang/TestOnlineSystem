@@ -135,6 +135,11 @@ export class StartupService {
             text: '数据分析',
             link: '/client/data-analysis',
             icon: { type: 'icon', value: 'cloud' }
+          },
+          {
+            text: '开始考试',
+            hide: true,
+            link: '/client/start-exam'
           }
         ]
       },
