@@ -2,8 +2,6 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '@shared';
 import { ClientRoutingModule } from './client-routing.module';
 import { ClientMockExamComponent } from './mock-exam/mock-exam.component';
-import { ClientMockExamEditComponent } from './mock-exam/edit/edit.component';
-import { ClientMockExamViewComponent } from './mock-exam/view/view.component';
 import { ClientFormalExamComponent } from './formal-exam/formal-exam.component';
 import { ClientFormalExamViewComponent } from './formal-exam/view/view.component';
 import { ClientExamHistoryComponent } from './exam-history/exam-history.component';
@@ -23,8 +21,6 @@ const COMPONENTS = [
   ClientUserinfoComponent,
   ClientStartExamComponent];
 const COMPONENTS_NOROUNT = [
-  ClientMockExamEditComponent,
-  ClientMockExamViewComponent,
   ClientFormalExamViewComponent,
   ClientQuestionCollectionEditComponent,
   ClientQuestionCollectionViewComponent,

@@ -1,9 +1,14 @@
+<!--
+ * @Author: Chen Wenhang
+ * @Description: 
+ * @Github: https://github.com/chenwenhang
+ * @Date: 2019-04-17 21:53:26
+ * @LastEditTime: 2019-04-23 20:35:13
+ -->
 <page-header [action]="phActionTpl">
-  <ng-template #phActionTpl>
-    <button (click)="add()" nz-button nzType="primary">新建</button>
-  </ng-template>
 </page-header>
 <nz-card>
-  <sf mode="search" [schema]="searchSchema" (formSubmit)="st.reset($event)" (formReset)="st.reset($event)"></sf>
-  <st #st [data]="url" [columns]="columns"></st>
+  <sf #sf (formSubmit)="submit($event)" [schema]="schema" [ui]="ui" [formData]="i" [button]="button">
+    <!-- <button nz-button type="submit" nzType="primary" (click)="save(sf.value)" [disabled]="!sf.valid" [nzLoading]="http.loading">开始考试</button> -->
+  </sf>
 </nz-card>

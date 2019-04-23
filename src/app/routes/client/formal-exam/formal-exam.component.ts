@@ -6,6 +6,7 @@ import { SFSchema } from '@delon/form';
 import { NzMessageService } from 'ng-zorro-antd';
 import { ClientStartExamComponent } from '../start-exam/start-exam.component';
 import { Router } from '@angular/router';
+import { ShareService } from '@core/startup/share.service';
 
 @Component({
   selector: 'app-client-formal-exam',
@@ -55,12 +56,8 @@ export class ClientFormalExamComponent implements OnInit {
           text: '开始考试',
           icon: 'edit',
           click: (item: any) => {
-            this.router.navigate(
-              ['/client/start-exam'],
-              {
-                queryParams: { '_id': item._id }
-              }
-            );
+            this.shareService.setPaper(item);
+            this.router.navigate(['/client/start-exam'], { queryParams: { '_id': item._id } });
           }
         },
       ]
@@ -72,6 +69,7 @@ export class ClientFormalExamComponent implements OnInit {
     private http: _HttpClient,
     private modal: ModalHelper,
     private msgSrv: NzMessageService,
+    public shareService: ShareService
   ) { }
 
   ngOnInit() { }

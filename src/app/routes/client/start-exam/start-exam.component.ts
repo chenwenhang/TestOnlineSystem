@@ -1,3 +1,4 @@
+import { ShareService } from '@core/startup/share.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { _HttpClient, ModalHelper } from '@delon/theme';
 import { STColumn, STComponent } from '@delon/abc';
@@ -12,6 +13,7 @@ export class ClientStartExamComponent implements OnInit {
   url = `/user`;
   _id: any;
   paper: any;
+  tag: any;
   searchSchema: SFSchema = {
     properties: {
       no: {
@@ -38,19 +40,27 @@ export class ClientStartExamComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private http: _HttpClient,
-    private modal: ModalHelper
+    private modal: ModalHelper,
+    public shareService: ShareService
   ) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(data => {
       let _id = data._id;
-      this.http.get(`/manage/paper/detail?_allow_anonymous=true&_id=${_id}`).subscribe((res: any) => {
-        this.paper = res.data[0];
-        console.log(this.paper);
+
+      if (_id == 0) {
+        // mock-exam
+        this.tag = this.shareService.getTag();
 
 
-      })
+      } else {
+        // formal-exam
+        this.paper = this.shareService.getPaper();
+
+
+      }
     })
+
   }
 
   add() {
