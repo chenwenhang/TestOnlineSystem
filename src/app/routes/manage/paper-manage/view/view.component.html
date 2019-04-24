@@ -3,7 +3,7 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2019-04-17 22:02:22
- * @LastEditTime: 2019-04-22 20:59:31
+ * @LastEditTime: 2019-04-24 15:30:20
  -->
 <div class="modal-header">
   <div class="modal-title">查看信息</div>
@@ -35,7 +35,7 @@
     <sv label="类型">{{ item.type }}</sv>
     <sv label="题干">{{ item.content }}</sv>
     <div *ngIf="item.type=='单选题'||item.type=='多选题'||item.type=='排序题'">
-      <sv label="选项 {{index+1}}" *ngFor="let j of item.analysis;let index=index">{{ j }}</sv>
+      <sv label="{{option[index]}}" *ngFor="let j of item.analysis;let index=index">{{ j }}</sv>
     </div>
     <sv label="答案">{{ item.right }}</sv>
     <sv label="分值">{{ item.score }}</sv>

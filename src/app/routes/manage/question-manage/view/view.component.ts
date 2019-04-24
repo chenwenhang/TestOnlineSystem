@@ -9,6 +9,8 @@ import { _HttpClient } from '@delon/theme';
 export class ManageQuestionManageViewComponent implements OnInit {
   record: any = {};
   i: any;
+  option = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'];
+
 
   constructor(
     private modal: NzModalRef,
