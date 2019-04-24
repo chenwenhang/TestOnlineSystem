@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
-import { SFSchema, SFUISchema } from '@delon/form';
+import { SFSchema, SFUISchema, SFComponent } from '@delon/form';
 import { of } from 'rxjs';
 import { delay } from 'rxjs/operators';
 
@@ -13,6 +13,9 @@ export class ManageQuestionManageEditComponent implements OnInit {
   record: any = {};
   i: any;
   tag = [];
+  pattern = ".*";
+  // pattern = "^([A-O],)*[A-O]$";
+  @ViewChild('sf') sf: SFComponent;
   schema: SFSchema = {
     properties: {
       type: {
@@ -55,7 +58,7 @@ export class ManageQuestionManageEditComponent implements OnInit {
       right: {
         type: 'string',
         title: '正确答案',
-        pattern: '^([A-O],)*[A-O]$',
+        pattern: this.pattern,
         format: 'regex',
         description: '注：<br>单选题直接输入大写字母；<br>排序题和多选题输入大写字母，以逗号隔开；<br>判断题输入A表示正确，输入B表示错误；<br>填空题直接输入答案'
       },
@@ -176,4 +179,7 @@ export class ManageQuestionManageEditComponent implements OnInit {
   close() {
     this.modal.destroy();
   }
+
+
+
 }
