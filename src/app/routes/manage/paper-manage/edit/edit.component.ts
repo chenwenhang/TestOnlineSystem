@@ -60,7 +60,9 @@ export class ManagePaperManageEditComponent implements OnInit {
             },
             score: {
               type: 'number',
-              title: "分值"
+              title: "分值",
+              minimum: 1,
+              maximum: 100
             }
           },
           required: [
