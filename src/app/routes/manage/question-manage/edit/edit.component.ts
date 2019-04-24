@@ -52,7 +52,10 @@ export class ManageQuestionManageEditComponent implements OnInit {
           }
         },
       },
-      right: { type: 'string', title: '正确答案' },
+      right: { 
+        type: 'string', 
+        title: '正确答案', 
+        description: '注：<br>单选题直接输入大写字母；<br>排序题和多选题输入大写字母，以逗号隔开；<br>判断题输入A表示正确，输入B表示错误；<br>填空题直接输入答案' },
       tag: { type: 'string', title: '标签' },
       explanation: {
         type: 'string',
