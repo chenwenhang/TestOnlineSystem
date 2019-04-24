@@ -3,13 +3,169 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2019-04-23 14:40:21
- * @LastEditTime: 2019-04-23 15:10:08
+ * @LastEditTime: 2019-04-24 23:12:24
  -->
 <page-header [action]="phActionTpl">
-  <ng-template #phActionTpl>
-    <button (click)="add()" nz-button nzType="primary">新建</button>
-  </ng-template>
 </page-header>
-<nz-card>
-  <button (click)="add()">出现吧</button>
-</nz-card>
+<!-- <nz-card> -->
+
+<form nz-form *ngIf="paper">
+
+  <nz-affix [nzOffsetTop]="120" (click)="saveExam()">
+    <button nz-button [nzType]="'primary'" nzSize="large">
+      <span>保存考试进度</span>
+    </button>
+  </nz-affix>
+
+  <nz-card>
+    <!-- 标题 -->
+    <div style="text-align: center;font-size: 20px">{{ paper.title }}</div>
+    <nz-divider nzText="考卷信息"></nz-divider>
+
+    <!-- 概述 -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5">考卷概述</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        {{paper.instructions}}
+      </nz-form-control>
+    </nz-form-item>
+
+    <!-- 作者 -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5">作者</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        {{paper.create_user}}
+      </nz-form-control>
+    </nz-form-item>
+
+    <!-- 职业 -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5">适用职业</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        {{paper.occupation}}
+      </nz-form-control>
+    </nz-form-item>
+
+    <!-- 开始时间 -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5">开始时间</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        {{paper.start_time}}
+      </nz-form-control>
+    </nz-form-item>
+
+    <!-- 结束时间 -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5">结束时间</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        {{paper.end_time}}
+      </nz-form-control>
+    </nz-form-item>
+
+    <!-- 总分 -->
+    <nz-form-item>
+      <nz-form-label [nzSpan]="5">总分</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        {{paper.total_mark}}
+      </nz-form-control>
+    </nz-form-item>
+  </nz-card>
+  <!-- 下面是题目 -->
+  <div nz-col nzSpan="24" *ngFor="let item of paper.questions;let num=index">
+    <nz-card>
+      <nz-divider nzText="第{{num+1}}题"></nz-divider>
+
+      <!-- 题型 -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">题型</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          {{item.type}}
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- 题干 -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">问题</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          {{item.content}}
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- 分值 -->
+      <nz-form-item>
+        <nz-form-label [nzSpan]="5">分值</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          {{item.score}}
+        </nz-form-control>
+      </nz-form-item>
+
+      <!-- 选项，除了填空题都有 -->
+      <div *ngIf="item.type=='单选题'||item.type=='多选题'||item.type=='排序题'">
+        <div *ngFor="let j of item.analysis;let index=index">
+          <nz-form-item>
+            <nz-form-label [nzSpan]="5">{{option[index]}}</nz-form-label>
+            <nz-form-control [nzSpan]="12">
+              {{ j }}
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+
+      <!-- 答案 -->
+      <div *ngIf="item.type=='单选题'">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="5">答案</nz-form-label>
+          <nz-radio-group [(ngModel)]="answer[num]" name="{{item._id}}" *ngFor="let j of item.analysis;let index=index">
+            <label nz-radio nzValue="{{option[index]}}">{{option[index]}}</label>
+          </nz-radio-group>
+        </nz-form-item>
+      </div>
+      <div *ngIf="item.type=='多选题'">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="5">答案</nz-form-label>
+          <nz-checkbox-wrapper *ngFor="let j of item.analysis;let index=index"
+            (nzOnChange)="updateAnswer($event,num,index)">
+            <label nz-checkbox nzValue="{{option[index]}}">{{option[index]}}</label>
+          </nz-checkbox-wrapper>
+        </nz-form-item>
+      </div>
+      <div *ngIf="item.type=='判断题'">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="5">答案</nz-form-label>
+          <nz-radio-group [(ngModel)]="answer[num]" name="{{item._id}}">
+            <label nz-radio nzValue="A">正确</label>
+            <label nz-radio nzValue="B">错误</label>
+          </nz-radio-group>
+        </nz-form-item>
+      </div>
+      <div *ngIf="item.type=='填空题'">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="5">答案</nz-form-label>
+          <nz-form-control [nzSpan]="12">
+            <input nz-input [(ngModel)]="answer[num]" name="{{item._id}}" />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+      <div *ngIf="item.type=='排序题'">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="5">答案</nz-form-label>
+          <nz-form-control [nzSpan]="12">
+            <input nz-input [(ngModel)]="answer[num]" name="{{item._id}}" id="{{item._id}}" />
+            <nz-form-extra nzOffset="5">请输入大写字母，以英文逗号间隔</nz-form-extra>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </nz-card>
+  </div>
+
+  <!-- <nz-form-item> -->
+  <nz-form-label [nzSpan]="10"></nz-form-label>
+  <nz-form-control [nzSpan]="4" style="margin-bottom: 30px;">
+    <button nz-button type="button" (click)="submit()" nzType="primary" nzSize="large" [nzLoading]="http.loading"
+      nzBlock>
+      交卷
+    </button>
+  </nz-form-control>
+  <!-- </nz-form-item> -->
+</form>
+<!-- </nz-card> -->
