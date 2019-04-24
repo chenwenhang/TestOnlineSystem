@@ -1,3 +1,4 @@
+var dateFormat = require('dateformat');
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { _HttpClient, ModalHelper } from '@delon/theme';
 import { STColumn, STComponent } from '@delon/abc';
@@ -22,13 +23,14 @@ export class ClientMockExamComponent implements OnInit {
     properties: {
       discription: { type: 'string', title: '描述', ui: { spanControl: 15 } },
       tag: { type: 'string', title: '标签', ui: { spanControl: 15 } },
+      size: { type: 'number', title: '题目数量', minimum: 1, maximum: 100, ui: { spanControl: 15 } },
     },
-    required: ['tag'],
+    required: ['tag', 'size'],
   };
   ui: SFUISchema = {
     $discription: {
       widget: 'text',
-      defaultText: '通过选择类别开始随机组卷生成的考试。用户若选择模拟考试，系统将根据用户在以下阶段填写的相关需求（如选择考察CSS、HTML知识内容或是JAVA知识内容、考试的时间等），智能地从题库中抽取题目，组编成一份完整而符合用户需求的试卷，自动匹配给用户。并且在考试结束后可以进入最后一个阶段，用户在此阶段可以立刻查看试卷分析。若不想立刻查看也可之后在考试记录中查找。',
+      defaultText: '通过选择类别开始随机组卷生成的考试。用户若选择模拟考试，系统将根据用户填写的相关需求（如选择考察CSS、HTML知识内容或是JAVA知识内容、题目数量等），智能地从题库中抽取题目，组编成一份完整而符合用户需求的试卷，自动匹配给用户。并且在考试结束后可以进入最后一个阶段，用户在此阶段可以立刻查看试卷分析。若不想立刻查看也可之后在考试记录中查找。',
       grid: { span: 4 },
     },
     $tag: {
@@ -70,10 +72,23 @@ export class ClientMockExamComponent implements OnInit {
   }
 
   submit($event) {
-    let tagArray = $event.tag;
-    this.shareService.setTag(tagArray);
+    let param = $event;
+    let tagString = param.tag.join('/');
 
-    this.router.navigate(['/client/start-exam'], { queryParams: { '_id': 0 } });
+    this.http.post(`/manage/question/random?_allow_anonymous=true`, param).subscribe((res: any) => {
+      let create_time = dateFormat(new Date(), 'yyyy-mm-dd HH:MM:ss');
+      let paper = {
+        title: create_time + " " + tagString + " 模拟考试",
+        create_time: create_time,
+        instructions: tagString,
+        start_time: create_time,
+        total_mark: 100,
+        question: res.data
+      }
+      this.shareService.setPaper(paper);
+      this.router.navigate(['/client/start-exam'], { queryParams: { 'mock': 1 } });
+
+    })
   }
 
 }

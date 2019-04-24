@@ -57,7 +57,7 @@ export class ClientFormalExamComponent implements OnInit {
           icon: 'edit',
           click: (item: any) => {
             this.shareService.setPaper(item);
-            this.router.navigate(['/client/start-exam'], { queryParams: { '_id': item._id } });
+            this.router.navigate(['/client/start-exam'], { queryParams: { 'mock': 0 } });
           }
         },
       ]
