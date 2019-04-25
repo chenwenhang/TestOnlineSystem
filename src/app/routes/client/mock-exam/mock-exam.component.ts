@@ -77,13 +77,18 @@ export class ClientMockExamComponent implements OnInit {
 
     this.http.post(`/manage/question/random?_allow_anonymous=true`, param).subscribe((res: any) => {
       let create_time = dateFormat(new Date(), 'yyyy-mm-dd HH:MM:ss');
+      let score = 100 / res.data.length;
+      for (let i = 0; i < res.data.length; i++) {
+        res.data[i].score = score;
+      }
       let paper = {
         title: create_time + " " + tagString + " 模拟考试",
         create_time: create_time,
         instructions: tagString,
+        create_user: JSON.parse(localStorage.getItem('user')).username,
         start_time: create_time,
         total_mark: 100,
-        question: res.data
+        questions: res.data
       }
       this.shareService.setPaper(paper);
       this.router.navigate(['/client/start-exam'], { queryParams: { 'mock': 1 } });
