@@ -13,7 +13,7 @@ import { ShareService } from '@core/startup/share.service';
   templateUrl: './formal-exam.component.html',
 })
 export class ClientFormalExamComponent implements OnInit {
-  url = `/manage/paper?_allow_anonymous=true`;
+  url = `/manage/paper/list?_allow_anonymous=true`;
   req = {
     reName: {
       pi: 'page',

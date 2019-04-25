@@ -22,13 +22,19 @@ export class ClientStartExamViewComponent implements OnInit {
 
   }
 
-  viewHistory() {
-    this.router.navigate(['/client/history-detail'], { queryParams: { 'mock': 0 } });
+  viewHistory(value: any) {
+    // console.log(value);
+    
+    this.router.navigate(['/client/history-detail'], { queryParams: { '_id': value._id } });
 
   }
 
   home() {
     this.router.navigate(['/dashboard']);
+  }
+
+  close() {
+
   }
 
 }

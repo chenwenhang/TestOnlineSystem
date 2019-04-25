@@ -39,6 +39,7 @@ export class ClientStartExamComponent implements OnInit {
           this.answer = this.paper.answers;
         } else {
           this.initNewExam();
+
         }
       } else {
         // if formal exam
@@ -53,10 +54,12 @@ export class ClientStartExamComponent implements OnInit {
             this.answer = this.paper.answers;
           } else {
             this.initNewExam();
+
           }
           // if not valid
         } else {
           this.initNewExam();
+
         }
       }
     } else {

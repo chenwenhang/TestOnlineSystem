@@ -3,7 +3,7 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2019-04-23 14:40:21
- * @LastEditTime: 2019-04-25 13:07:10
+ * @LastEditTime: 2019-04-25 13:59:22
  -->
 <div class="modal-header">
   <div class="modal-title">考试结束</div>
@@ -13,6 +13,6 @@
   <sv label="你的得分是">{{ i.my_mark }}</sv>
 </div>
 <div class="modal-footer">
-  <button nz-button type="button" nzType="primary" (click)="viewHistory()">查看解析</button>
-  <button nz-button type="button" nzType="default" (click)="home()">保存</button>
+  <button nz-button type="button" nzType="primary" (click)="viewHistory(i)">查看解析</button>
+  <button nz-button type="button" nzType="default" (click)="home()">回到首页</button>
 </div>
