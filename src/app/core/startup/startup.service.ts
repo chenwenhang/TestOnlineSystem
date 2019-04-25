@@ -122,6 +122,11 @@ export class StartupService {
             icon: { type: 'icon', value: 'folder' }
           },
           {
+            text: '考试详情',
+            link: '/client/history-detail',
+            hide: true,
+          },
+          {
             text: '我的收藏',
             link: '/client/question-collection',
             icon: { type: 'icon', value: 'star' }
@@ -129,7 +134,7 @@ export class StartupService {
           {
             text: '我的信息',
             link: '/client/userinfo',
-            icon: { type: 'icon', value: 'info' }
+            hide: true,
           },
           {
             text: '数据分析',

@@ -3,7 +3,7 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2018-12-29 20:01:43
- * @LastEditTime: 2019-04-22 23:38:26
+ * @LastEditTime: 2019-04-25 14:52:33
  -->
 <div class="alain-default__header-logo">
   <a [routerLink]="['/']" class="alain-default__header-logo-link">
@@ -15,6 +15,16 @@
 </div>
 <div class="alain-default__nav-wrap">
   <ul class="alain-default__nav">
+    <li>
+      <a class="alain-default__nav-item" href="/#/client/start-exam">
+        <button nz-button [nzType]="'primary'"><span>当前考试</span></button>
+      </a>
+    </li>
+    <li>
+        <a class="alain-default__nav-item" href="/#/client/userinfo">
+          <button nz-button [nzType]="'primary'"><span>我的信息</span></button>
+        </a>
+      </li>
     <!-- Menu -->
     <li>
       <div class="alain-default__nav-item" (click)="toggleCollapsedSidebar()">
