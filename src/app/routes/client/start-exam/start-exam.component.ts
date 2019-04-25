@@ -4,6 +4,8 @@ import { _HttpClient, ModalHelper } from '@delon/theme';
 import { STColumn, STComponent } from '@delon/abc';
 import { SFSchema, SFUISchema, SFComponent } from '@delon/form';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, Validators } from '@angular/forms';
+var validator = require('validator');
 
 @Component({
   selector: 'app-client-start-exam',
@@ -109,6 +111,8 @@ export class ClientStartExamComponent implements OnInit {
   }
 
   saveExam(value: any) {
+    console.log(validator.matches("A,B,C", '^([A-O],)*[A-O]$'));
+    console.log(validator.matches("A,B,C,d", '^([A-O],)*[A-O]$'));
     localStorage.setItem("paper", JSON.stringify(this.paper));
   }
 
@@ -119,4 +123,12 @@ export class ClientStartExamComponent implements OnInit {
     let timestamp = new Date(date).getTime();
     return timestamp;
   }
+
+  isMatch(value: any) {
+    if (value === null || value == undefined)
+      return true;
+    let str = String(value);
+    return validator.matches(str, '^([A-O],)*[A-O]$');
+  }
+
 }

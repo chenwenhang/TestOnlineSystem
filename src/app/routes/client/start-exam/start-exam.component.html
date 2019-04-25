@@ -3,7 +3,7 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2019-04-23 14:40:21
- * @LastEditTime: 2019-04-24 23:12:24
+ * @LastEditTime: 2019-04-25 09:15:03
  -->
 <page-header [action]="phActionTpl">
 </page-header>
@@ -149,8 +149,9 @@
       <div *ngIf="item.type=='排序题'">
         <nz-form-item>
           <nz-form-label [nzSpan]="5">答案</nz-form-label>
-          <nz-form-control [nzSpan]="12">
+          <nz-form-control [nzSpan]="12" [nzValidateStatus]="isMatch(answer[num])?'success':'error'">
             <input nz-input [(ngModel)]="answer[num]" name="{{item._id}}" id="{{item._id}}" />
+            <nz-form-explain *ngIf="!isMatch(answer[num])">格式不合法！</nz-form-explain>
             <nz-form-extra nzOffset="5">请输入大写字母，以英文逗号间隔</nz-form-extra>
           </nz-form-control>
         </nz-form-item>
