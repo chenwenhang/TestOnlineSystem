@@ -3,7 +3,7 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2019-04-25 13:10:35
- * @LastEditTime: 2019-04-25 14:40:24
+ * @LastEditTime: 2019-04-25 22:28:44
  -->
 <page-header [action]="phActionTpl">
 </page-header>
@@ -57,11 +57,11 @@
 
     <!-- 得分 -->
     <nz-form-item>
-        <nz-form-label [nzSpan]="5">得分</nz-form-label>
-        <nz-form-control [nzSpan]="12">
-          {{paper.my_mark}}
-        </nz-form-control>
-      </nz-form-item>
+      <nz-form-label [nzSpan]="5">得分</nz-form-label>
+      <nz-form-control [nzSpan]="12">
+        {{paper.my_mark}}
+      </nz-form-control>
+    </nz-form-item>
 
     <!-- 总分 -->
     <nz-form-item>
@@ -71,11 +71,14 @@
       </nz-form-control>
     </nz-form-item>
   </nz-card>
+
   <!-- 下面是题目 -->
   <div nz-col nzSpan="24" *ngFor="let item of paper.questions;let num=index">
-    <nz-card>
+    <nz-card [ngStyle]="{'background-color':item.right === item.answer ? 'white' : '#FFF0F0' }">
       <nz-divider nzText="第{{num+1}}题"></nz-divider>
-
+      <nz-rate *ngIf="this.collectionNum" (ngModelChange)="change(num)" [(ngModel)]="this.collectionNum[num]"
+        [nzCount]="1" name="rate{{num}}">
+      </nz-rate>
       <!-- 题型 -->
       <nz-form-item>
         <nz-form-label [nzSpan]="5">题型</nz-form-label>
@@ -115,7 +118,7 @@
       <!-- 答案 -->
       <div *ngIf="item.type=='单选题'||item.type=='多选题'||item.type=='填空题'||item.type=='排序题'">
         <nz-form-item>
-          <nz-form-label [nzSpan]="5">答案</nz-form-label>
+          <nz-form-label [nzSpan]="5">正确答案</nz-form-label>
           <nz-form-control [nzSpan]="12">
             {{ item.right }}
           </nz-form-control>
@@ -123,7 +126,7 @@
       </div>
       <div *ngIf="item.type=='判断题'">
         <nz-form-item>
-          <nz-form-label [nzSpan]="5">标准答案</nz-form-label>
+          <nz-form-label [nzSpan]="5">正确答案</nz-form-label>
           <nz-form-control [nzSpan]="12">
             {{ item.right=='A'?'是':'否' }}
           </nz-form-control>
@@ -134,15 +137,15 @@
       <div *ngIf="item.type=='单选题'||item.type=='多选题'||item.type=='填空题'||item.type=='排序题'">
         <nz-form-item>
           <nz-form-label [nzSpan]="5">你的答案</nz-form-label>
-          <nz-form-control [nzSpan]="12">
+          <nz-form-control [nzSpan]="12" [ngStyle]="{'color':item.right === item.answer ? '#87d068' : 'red' }">
             {{ item.answer }}
           </nz-form-control>
         </nz-form-item>
       </div>
       <div *ngIf="item.type=='判断题'">
         <nz-form-item>
-          <nz-form-label [nzSpan]="5">答案</nz-form-label>
-          <nz-form-control [nzSpan]="12">
+          <nz-form-label [nzSpan]="5">你的答案</nz-form-label>
+          <nz-form-control [nzSpan]="12" [ngStyle]="{'color':item.right === item.answer ? '#87d068' : 'red' }">
             {{ item.answer=='A'?'是':'否' }}
           </nz-form-control>
         </nz-form-item>
