@@ -1,14 +1,18 @@
+<!--
+ * @Author: Chen Wenhang
+ * @Description: 
+ * @Github: https://github.com/chenwenhang
+ * @Date: 2019-04-23 14:40:21
+ * @LastEditTime: 2019-04-25 13:07:10
+ -->
 <div class="modal-header">
-  <div class="modal-title">查看 {{ record.id }} 信息</div>
+  <div class="modal-title">考试结束</div>
 </div>
 <nz-spin *ngIf="!i" class="modal-spin"></nz-spin>
 <div sv-container *ngIf="i">
-  <sv label="姓名">{{ i.owner }}</sv>
-  <sv label="会员卡号">32943898021309809423</sv>
-  <sv label="身份证">3321944288191034921</sv>
-  <sv label="联系方式">18112345678</sv>
-  <sv label="联系地址">曲丽丽 18100000000 浙江省杭州市西湖区黄姑山路工专路交叉路口</sv>
+  <sv label="你的得分是">{{ i.my_mark }}</sv>
 </div>
 <div class="modal-footer">
-  <button nz-button type="button" (click)="close()">关闭</button>
+  <button nz-button type="button" nzType="primary" (click)="viewHistory()">查看解析</button>
+  <button nz-button type="button" nzType="default" (click)="home()">保存</button>
 </div>

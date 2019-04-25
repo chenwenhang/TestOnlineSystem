@@ -3,7 +3,7 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2019-04-23 14:40:21
- * @LastEditTime: 2019-04-25 09:15:03
+ * @LastEditTime: 2019-04-25 12:11:32
  -->
 <page-header [action]="phActionTpl">
 </page-header>
@@ -39,7 +39,7 @@
     </nz-form-item>
 
     <!-- 职业 -->
-    <nz-form-item>
+    <nz-form-item *ngIf="paper.occupation">
       <nz-form-label [nzSpan]="5">适用职业</nz-form-label>
       <nz-form-control [nzSpan]="12">
         {{paper.occupation}}
@@ -55,7 +55,7 @@
     </nz-form-item>
 
     <!-- 结束时间 -->
-    <nz-form-item>
+    <nz-form-item *ngIf="paper.end_time">
       <nz-form-label [nzSpan]="5">结束时间</nz-form-label>
       <nz-form-control [nzSpan]="12">
         {{paper.end_time}}
@@ -113,7 +113,7 @@
 
       <!-- 答案 -->
       <div *ngIf="item.type=='单选题'">
-        <nz-form-item>
+        <nz-form-item *ngIf="answer">
           <nz-form-label [nzSpan]="5">答案</nz-form-label>
           <nz-radio-group [(ngModel)]="answer[num]" name="{{item._id}}" *ngFor="let j of item.analysis;let index=index">
             <label nz-radio nzValue="{{option[index]}}">{{option[index]}}</label>
@@ -121,7 +121,7 @@
         </nz-form-item>
       </div>
       <div *ngIf="item.type=='多选题'">
-        <nz-form-item>
+        <nz-form-item *ngIf="answer">
           <nz-form-label [nzSpan]="5">答案</nz-form-label>
           <nz-checkbox-wrapper *ngFor="let j of item.analysis;let index=index"
             (nzOnChange)="updateAnswer($event,num,index)">
@@ -130,7 +130,7 @@
         </nz-form-item>
       </div>
       <div *ngIf="item.type=='判断题'">
-        <nz-form-item>
+        <nz-form-item *ngIf="answer">
           <nz-form-label [nzSpan]="5">答案</nz-form-label>
           <nz-radio-group [(ngModel)]="answer[num]" name="{{item._id}}">
             <label nz-radio nzValue="A">正确</label>
@@ -139,7 +139,7 @@
         </nz-form-item>
       </div>
       <div *ngIf="item.type=='填空题'">
-        <nz-form-item>
+        <nz-form-item *ngIf="answer">
           <nz-form-label [nzSpan]="5">答案</nz-form-label>
           <nz-form-control [nzSpan]="12">
             <input nz-input [(ngModel)]="answer[num]" name="{{item._id}}" />
@@ -147,7 +147,7 @@
         </nz-form-item>
       </div>
       <div *ngIf="item.type=='排序题'">
-        <nz-form-item>
+        <nz-form-item *ngIf="answer">
           <nz-form-label [nzSpan]="5">答案</nz-form-label>
           <nz-form-control [nzSpan]="12" [nzValidateStatus]="isMatch(answer[num])?'success':'error'">
             <input nz-input [(ngModel)]="answer[num]" name="{{item._id}}" id="{{item._id}}" />
