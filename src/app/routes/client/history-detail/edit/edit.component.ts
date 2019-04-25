@@ -4,10 +4,10 @@ import { _HttpClient } from '@delon/theme';
 import { SFSchema, SFUISchema } from '@delon/form';
 
 @Component({
-  selector: 'app-client-start-exam-edit',
+  selector: 'app-client-history-detail-edit',
   templateUrl: './edit.component.html',
 })
-export class ClientStartExamEditComponent implements OnInit {
+export class ClientHistoryDetailEditComponent implements OnInit {
   record: any = {};
   i: any;
   schema: SFSchema = {

@@ -10,8 +10,10 @@ import { ClientQuestionCollectionEditComponent } from './question-collection/edi
 import { ClientQuestionCollectionViewComponent } from './question-collection/view/view.component';
 import { ClientUserinfoComponent } from './userinfo/userinfo.component';
 import { ClientStartExamComponent } from './start-exam/start-exam.component';
-import { ClientStartExamEditComponent } from './start-exam/edit/edit.component';
 import { ClientStartExamViewComponent } from './start-exam/view/view.component';
+import { ClientHistoryDetailComponent } from './history-detail/history-detail.component';
+import { ClientHistoryDetailEditComponent } from './history-detail/edit/edit.component';
+import { ClientHistoryDetailViewComponent } from './history-detail/view/view.component';
 
 const COMPONENTS = [
   ClientMockExamComponent,
@@ -19,13 +21,15 @@ const COMPONENTS = [
   ClientExamHistoryComponent,
   ClientQuestionCollectionComponent,
   ClientUserinfoComponent,
-  ClientStartExamComponent];
+  ClientStartExamComponent,
+  ClientHistoryDetailComponent];
 const COMPONENTS_NOROUNT = [
   ClientFormalExamViewComponent,
   ClientQuestionCollectionEditComponent,
   ClientQuestionCollectionViewComponent,
-  ClientStartExamEditComponent,
-  ClientStartExamViewComponent];
+  ClientStartExamViewComponent,
+  ClientHistoryDetailEditComponent,
+  ClientHistoryDetailViewComponent];
 
 @NgModule({
   imports: [
