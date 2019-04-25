@@ -2,37 +2,62 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { _HttpClient, ModalHelper } from '@delon/theme';
 import { STColumn, STComponent } from '@delon/abc';
 import { SFSchema } from '@delon/form';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client-exam-history',
   templateUrl: './exam-history.component.html',
 })
 export class ClientExamHistoryComponent implements OnInit {
-  url = `/user`;
+  username = JSON.parse(localStorage.getItem('user')).username;
+  url = `/manage/paper_history?_allow_anonymous=true&username=${this.username}`;
+  req = {
+    reName: {
+      pi: 'page',
+      ps: 'size'
+    }
+  }
+  res = {
+    reName: {
+      total: 'count',
+      list: 'data'
+    }
+  };
   searchSchema: SFSchema = {
     properties: {
-      no: {
+      title: {
         type: 'string',
-        title: '编号'
+        title: '标题'
       }
     }
   };
   @ViewChild('st') st: STComponent;
   columns: STColumn[] = [
-    { title: '编号', index: 'no' },
-    { title: '调用次数', type: 'number', index: 'callNo' },
-    { title: '头像', type: 'img', width: '50px', index: 'avatar' },
-    { title: '时间', type: 'date', index: 'updatedAt' },
+    { title: '标题', index: 'title', width: '25%' },
+    { title: '作者', index: 'create_user' },
+    { title: '适用职业', index: 'occupation', default: "模拟考试" },
+    { title: '创建时间', index: 'create_time' },
     {
       title: '',
       buttons: [
-        // { text: '查看', click: (item: any) => `/form/${item.id}` },
-        // { text: '编辑', type: 'static', component: FormEditComponent, click: 'reload' },
+        {
+          text: '查看解析',
+          icon: 'zoom-in',
+          click: (item: any) => {
+            this.router.navigate(['/client/history-detail'], { queryParams: { '_id': item._id } });
+
+          }
+        },
       ]
     }
   ];
 
-  constructor(private http: _HttpClient, private modal: ModalHelper) { }
+  constructor(
+    private http: _HttpClient,
+    private modal: ModalHelper,
+    private router: Router,
+
+  ) { }
 
   ngOnInit() { }
 

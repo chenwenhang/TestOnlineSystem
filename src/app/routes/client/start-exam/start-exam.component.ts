@@ -123,6 +123,8 @@ export class ClientStartExamComponent implements OnInit {
       // add end_time
       this.paper.end_time = dateFormat(new Date(), 'yyyy-mm-dd HH:MM:ss');
     }
+    // add username
+    this.paper.username = JSON.parse(localStorage.getItem('user')).username;
 
     // add answer to questions
     for (let j = 0; j < this.paper.questions.length; j++) {

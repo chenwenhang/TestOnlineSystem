@@ -23,7 +23,6 @@ export class ClientHistoryDetailComponent implements OnInit {
       let _id = data._id;
       this.http.get(`/manage/paper_history/detail?_allow_anonymous=true&_id=${_id}`).subscribe((res: any) => {
         this.paper = res.data[0];
-        console.log(this.paper);
         
       });
     });
