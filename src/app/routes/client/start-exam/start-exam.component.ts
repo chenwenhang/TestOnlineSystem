@@ -28,6 +28,8 @@ export class ClientStartExamComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    console.log("???");
+    
     let tmp = JSON.parse(localStorage.getItem('paper'));
     if (tmp) {
       // if mock exam
@@ -64,6 +66,7 @@ export class ClientStartExamComponent implements OnInit {
       }
     } else {
       this.initNewExam();
+
     }
   }
 
@@ -78,6 +81,7 @@ export class ClientStartExamComponent implements OnInit {
       if (!this.paper) {
         alert("当前没有考试！");
         this.router.navigate(['/dashboard']);
+        // window.location.href="/#/dashboard";
       }
       // if mock exam
       if (this.mock == "1") {

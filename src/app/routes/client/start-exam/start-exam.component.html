@@ -3,14 +3,13 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2019-04-23 14:40:21
- * @LastEditTime: 2019-04-25 12:11:32
+ * @LastEditTime: 2019-04-26 15:14:23
  -->
-<page-header [action]="phActionTpl">
+<page-header [action]="phActionTpl" *ngIf="paper">
 </page-header>
 <!-- <nz-card> -->
 
 <form nz-form *ngIf="paper">
-
   <nz-affix [nzOffsetTop]="120" (click)="saveExam()">
     <button nz-button [nzType]="'primary'" nzSize="large">
       <span>保存考试进度</span>
@@ -70,6 +69,7 @@
       </nz-form-control>
     </nz-form-item>
   </nz-card>
+
   <!-- 下面是题目 -->
   <div nz-col nzSpan="24" *ngFor="let item of paper.questions;let num=index">
     <nz-card>
