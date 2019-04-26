@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ClientHistoryDetailComponent implements OnInit {
   option = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'];
-  username = JSON.parse(localStorage.getItem('user')).username;;
+  username = JSON.parse(localStorage.getItem('user')).username;
   paper: any;
   collectionNum: any;
   collectionId = [];

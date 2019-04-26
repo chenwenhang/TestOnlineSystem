@@ -9,6 +9,7 @@ import { _HttpClient } from '@delon/theme';
 export class ClientQuestionCollectionViewComponent implements OnInit {
   record: any = {};
   i: any;
+  option = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'];
 
   constructor(
     private modal: NzModalRef,
@@ -17,7 +18,7 @@ export class ClientQuestionCollectionViewComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.http.get(`/user/${this.record.id}`).subscribe(res => this.i = res);
+    
   }
 
   close() {

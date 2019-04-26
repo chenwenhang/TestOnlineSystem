@@ -1,13 +1,29 @@
+<!--
+ * @Author: Chen Wenhang
+ * @Description: 
+ * @Github: https://github.com/chenwenhang
+ * @Date: 2019-04-17 22:21:36
+ * @LastEditTime: 2019-04-26 14:06:52
+ -->
 <div class="modal-header">
-  <div class="modal-title">查看 {{ record.id }} 信息</div>
+  <div class="modal-title">查看信息</div>
 </div>
 <nz-spin *ngIf="!i" class="modal-spin"></nz-spin>
-<div sv-container *ngIf="i">
-  <sv label="姓名">{{ i.owner }}</sv>
-  <sv label="会员卡号">32943898021309809423</sv>
-  <sv label="身份证">3321944288191034921</sv>
-  <sv label="联系方式">18112345678</sv>
-  <sv label="联系地址">曲丽丽 18100000000 浙江省杭州市西湖区黄姑山路工专路交叉路口</sv>
+<div sv-container *ngIf="i" [col]="1">
+  <sv label="类型">{{ i.type }}</sv>
+  <sv label="题干">{{ i.content }}</sv>
+
+  <div *ngIf="i.type=='单选题'||i.type=='多选题'||i.type=='排序题'">
+    <sv label="{{option[index]}}" *ngFor="let item of i.analysis;let index=index">{{ item }}</sv>
+  </div>
+
+  <sv label="标准答案">{{ i.right }}</sv>
+  <sv label="解析">{{ i.explanation }}</sv>
+  <sv label="标签">
+    <nz-tag [nzColor]="'#87d068'" *ngFor="let item of i.tag">{{item}}</nz-tag>
+  </sv>
+  <sv label="创建时间">{{ i.create_time }}</sv>
+
 </div>
 <div class="modal-footer">
   <button nz-button type="button" (click)="close()">关闭</button>

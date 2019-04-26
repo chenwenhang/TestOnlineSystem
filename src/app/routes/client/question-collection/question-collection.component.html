@@ -1,9 +1,19 @@
+<!--
+ * @Author: Chen Wenhang
+ * @Description: 
+ * @Github: https://github.com/chenwenhang
+ * @Date: 2019-04-17 22:21:36
+ * @LastEditTime: 2019-04-26 14:00:44
+ -->
 <page-header [action]="phActionTpl">
-  <ng-template #phActionTpl>
-    <button (click)="add()" nz-button nzType="primary">新建</button>
-  </ng-template>
 </page-header>
 <nz-card>
   <sf mode="search" [schema]="searchSchema" (formSubmit)="st.reset($event)" (formReset)="st.reset($event)"></sf>
-  <st #st [data]="url" [columns]="columns"></st>
+  <st #st [data]="url" [columns]="columns" [res]="res" [req]="req" ps="10" [noResult]="'这个表是空的哦~'">
+    <ng-template st-row="custom" let-item let-index="index">
+      <nz-tooltip>
+        <nz-tag [nzColor]="'#87d068'" *ngFor="let element of item.tag">{{element}}</nz-tag>
+      </nz-tooltip>
+    </ng-template>
+  </st>
 </nz-card>
