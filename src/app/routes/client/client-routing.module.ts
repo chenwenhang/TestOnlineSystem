@@ -7,6 +7,7 @@ import { ClientQuestionCollectionComponent } from './question-collection/questio
 import { ClientUserinfoComponent } from './userinfo/userinfo.component';
 import { ClientStartExamComponent } from './start-exam/start-exam.component';
 import { ClientHistoryDetailComponent } from './history-detail/history-detail.component';
+import { ClientDataAnalysisComponent } from './data-analysis/data-analysis.component';
 
 const routes: Routes = [
 
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'question-collection', component: ClientQuestionCollectionComponent },
   { path: 'userinfo', component: ClientUserinfoComponent },
   { path: 'start-exam', component: ClientStartExamComponent },
-  { path: 'history-detail', component: ClientHistoryDetailComponent }];
+  { path: 'history-detail', component: ClientHistoryDetailComponent },
+  { path: 'data-analysis', component: ClientDataAnalysisComponent }];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

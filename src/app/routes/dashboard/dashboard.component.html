@@ -1,6 +1,19 @@
-<div class="alain-default__content-title">
-  <h1>
-    Page Name
-    <small>Welcome !</small>
-  </h1>
-</div>
+<!--
+ * @Author: Chen Wenhang
+ * @Description: 
+ * @Github: https://github.com/chenwenhang
+ * @Date: 2018-12-29 20:01:43
+ * @LastEditTime: 2019-04-26 17:20:51
+ -->
+<div style="padding:15px"></div>
+<nz-card>
+  <div class="top">
+    <div class="head">
+      <!-- <img class="logo" src="./assets/logo-color.svg"> -->
+      <span class="title">你想学的，这里都有</span>
+    </div>
+    <div class="desc">基于 Angular, Ng Alain, NodeJS, MongoDB 的IT教育课程考评系统</div>
+    <g2-tag-cloud *ngIf="tags" [data]="tags" [height]="400"></g2-tag-cloud>
+
+  </div>
+</nz-card>

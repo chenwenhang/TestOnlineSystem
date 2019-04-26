@@ -7,6 +7,7 @@ import { AlainThemeModule } from '@delon/theme';
 import { DelonABCModule } from '@delon/abc';
 import { DelonACLModule } from '@delon/acl';
 import { DelonFormModule } from '@delon/form';
+import { DelonChartModule } from '@delon/chart';
 
 // #region third libs
 import { NgZorroAntdModule } from 'ng-zorro-antd';
@@ -32,6 +33,7 @@ const DIRECTIVES = [];
     DelonABCModule,
     DelonACLModule,
     DelonFormModule,
+    DelonChartModule,
     // third libs
     ...THIRDMODULES
   ],
@@ -49,6 +51,7 @@ const DIRECTIVES = [];
     DelonABCModule,
     DelonACLModule,
     DelonFormModule,
+    DelonChartModule,
     // third libs
     ...THIRDMODULES,
     // your components

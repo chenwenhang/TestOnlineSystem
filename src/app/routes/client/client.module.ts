@@ -6,7 +6,6 @@ import { ClientFormalExamComponent } from './formal-exam/formal-exam.component';
 import { ClientFormalExamViewComponent } from './formal-exam/view/view.component';
 import { ClientExamHistoryComponent } from './exam-history/exam-history.component';
 import { ClientQuestionCollectionComponent } from './question-collection/question-collection.component';
-import { ClientQuestionCollectionEditComponent } from './question-collection/edit/edit.component';
 import { ClientQuestionCollectionViewComponent } from './question-collection/view/view.component';
 import { ClientUserinfoComponent } from './userinfo/userinfo.component';
 import { ClientStartExamComponent } from './start-exam/start-exam.component';
@@ -14,6 +13,7 @@ import { ClientStartExamViewComponent } from './start-exam/view/view.component';
 import { ClientHistoryDetailComponent } from './history-detail/history-detail.component';
 import { ClientHistoryDetailEditComponent } from './history-detail/edit/edit.component';
 import { ClientHistoryDetailViewComponent } from './history-detail/view/view.component';
+import { ClientDataAnalysisComponent } from './data-analysis/data-analysis.component';
 
 const COMPONENTS = [
   ClientMockExamComponent,
@@ -22,10 +22,10 @@ const COMPONENTS = [
   ClientQuestionCollectionComponent,
   ClientUserinfoComponent,
   ClientStartExamComponent,
-  ClientHistoryDetailComponent];
+  ClientHistoryDetailComponent,
+  ClientDataAnalysisComponent];
 const COMPONENTS_NOROUNT = [
   ClientFormalExamViewComponent,
-  ClientQuestionCollectionEditComponent,
   ClientQuestionCollectionViewComponent,
   ClientStartExamViewComponent,
   ClientHistoryDetailEditComponent,

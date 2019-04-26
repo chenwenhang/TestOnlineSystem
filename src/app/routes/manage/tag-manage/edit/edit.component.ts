@@ -12,7 +12,7 @@ export class ManageTagManageEditComponent implements OnInit {
   i: any;
   schema: SFSchema = {
     properties: {
-      tag: { type: 'string', title: '标签名', maxLength: 15 },
+      tag: { type: 'string', title: '标签名', maxLength: 50 },
     },
     required: ['tag'],
   };
