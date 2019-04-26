@@ -52,7 +52,7 @@ export class ClientUserinfoComponent implements OnInit {
         return;
       }
       this.msg.success(res.msg);
-      console.log(this.user);
+      // console.log(this.user);
 
       this.startupService.setUser(this.user);
     });

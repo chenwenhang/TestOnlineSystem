@@ -28,7 +28,7 @@ export class ClientStartExamComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log("???");
+    // console.log("???");
     
     let tmp = JSON.parse(localStorage.getItem('paper'));
     if (tmp) {

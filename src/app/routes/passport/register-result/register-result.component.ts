@@ -14,9 +14,9 @@ export class UserRegisterResultComponent {
     public msg: NzMessageService,
   ) {
     route.queryParams.subscribe((params: Params) => {
-      console.log(route.snapshot.queryParams);
+      // console.log(route.snapshot.queryParams);
 
-      console.log(params);
+      // console.log(params);
 
       this.params.username = this.username = params['username'];
     });
