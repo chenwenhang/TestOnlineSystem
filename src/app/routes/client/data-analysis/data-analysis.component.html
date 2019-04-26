@@ -3,10 +3,50 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2019-04-26 15:48:44
- * @LastEditTime: 2019-04-26 19:29:20
+ * @LastEditTime: 2019-04-26 22:18:03
  -->
 <page-header>
 </page-header>
-<nz-card>
-  
-</nz-card>
+<div nz-row>
+  <div nz-col nzSpan="6" *ngIf="rate">
+    <g2-card [title]="'正确率'" [bordered]="true" [total]="rate" contentHeight="46" [action]="action1">
+      <ng-template #action1>
+        <nz-tooltip [nzTitle]="'用户做题正确率'">
+          <i nz-tooltip nz-icon type="info-circle"></i>
+        </nz-tooltip>
+      </ng-template>
+    </g2-card>
+  </div>
+  <div nz-col nzSpan="6" *ngIf="paper">
+    <g2-card [title]="'完成试卷数'" [bordered]="true" [total]="paper" contentHeight="46" [action]="action2">
+      <ng-template #action2>
+        <nz-tooltip [nzTitle]="'用户做题总数'">
+          <i nz-tooltip nz-icon type="info-circle"></i>
+        </nz-tooltip>
+      </ng-template>
+    </g2-card>
+  </div>
+  <div nz-col nzSpan="6" *ngIf="total">
+    <g2-card [title]="'做题总数'" [bordered]="true" [total]="total" contentHeight="46" [action]="action2">
+      <ng-template #action2>
+        <nz-tooltip [nzTitle]="'用户做题总数'">
+          <i nz-tooltip nz-icon type="info-circle"></i>
+        </nz-tooltip>
+      </ng-template>
+    </g2-card>
+  </div>
+  <div nz-col nzSpan="6" *ngIf="collect">
+    <g2-card [title]="'收藏试题数'" [bordered]="true" [total]="collect" contentHeight="46" [action]="action3">
+      <ng-template #action3>
+        <nz-tooltip [nzTitle]="'用户收藏试题数'">
+          <i nz-tooltip nz-icon type="info-circle"></i>
+        </nz-tooltip>
+      </ng-template>
+    </g2-card>
+  </div>
+</div>
+<div nz-row *ngIf="salesData">
+  <nz-card>
+    <g2-bar height="400" [title]="'完成试题种类分布'" [data]="salesData"></g2-bar>
+  </nz-card>
+</div>

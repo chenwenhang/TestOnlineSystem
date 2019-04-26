@@ -16,7 +16,7 @@ export class ManageUserManageEditComponent implements OnInit {
   @ViewChild('sf') sf: SFComponent;
   schema: SFSchema = {
     properties: {
-      username: { type: 'string', title: '帐号', minLength: 6, maxLength: 15, readOnly: true },
+      username: { type: 'string', title: '帐号', minLength: 6, maxLength: 15, readOnly: false },
       nickname: { type: 'string', title: '昵称' },
       occupation: { type: 'string', title: '职业', enum: [] },
       email: { type: 'string', title: '邮箱', format: 'email' },
@@ -79,6 +79,7 @@ export class ManageUserManageEditComponent implements OnInit {
         this.occupation.push({ label: tmp, value: tmp });
       }
       this.schema.properties.occupation.enum = this.occupation;
+      this.schema.properties.username.readOnly = this.i._id == 0 ? false : true;
       this.sf.refreshSchema();
       // console.log(this.occupation);
     })
