@@ -3,6 +3,7 @@ import { _HttpClient, ModalHelper } from '@delon/theme';
 import { STColumn, STComponent } from '@delon/abc';
 import { SFSchema } from '@delon/form';
 import { ActivatedRoute } from '@angular/router';
+import { NzMessageService } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-client-history-detail',
@@ -19,6 +20,7 @@ export class ClientHistoryDetailComponent implements OnInit {
     private http: _HttpClient,
     private modal: ModalHelper,
     private route: ActivatedRoute,
+    private msgSrv: NzMessageService,
   ) { }
 
   ngOnInit() {
@@ -59,15 +61,14 @@ export class ClientHistoryDetailComponent implements OnInit {
 
       this.http.post(`/manage/question_collection/add?_allow_anonymous=true`, que).subscribe((res: any) => {
         // console.log(res);
-        console.log(res);
-
+        this.msgSrv.success("收藏成功！");
 
       })
       // delete from collection
     } else {
       this.http.delete(`/manage/question_collection/delete?_allow_anonymous=true&question_id=${this.paper.questions[num]._id}&username=${this.username}`).subscribe((res: any) => {
         // console.log(res);
-        console.log(res);
+        this.msgSrv.success("取消收藏成功！");
 
 
       })
