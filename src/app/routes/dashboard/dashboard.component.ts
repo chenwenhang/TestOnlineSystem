@@ -23,9 +23,16 @@ export class DashboardComponent implements OnInit {
         }
         tmpTags.push({
           'x': tmp[i].tag,
-          'value': Math.floor(Math.random()*99899999988 +10000001),
+          'value': Math.floor(Math.random()*99899999 +10000001),
           'category': tmp[i].tag
         });
+        if(tmp[i].tag == "Angular"){
+          tmpTags.push({
+            'x': 'Angular',
+            'value': 1383220000,
+            'category': 'Angular'
+          });
+        }
       }
       this.tags = tmpTags;
       console.log(this.tags);
