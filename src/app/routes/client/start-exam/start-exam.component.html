@@ -3,7 +3,7 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2019-04-23 14:40:21
- * @LastEditTime: 2019-04-26 19:29:55
+ * @LastEditTime: 2019-04-27 13:36:18
  -->
 <page-header *ngIf="paper">
 </page-header>
@@ -15,6 +15,12 @@
       <span>保存考试进度</span>
     </button>
   </nz-affix>
+
+  <nz-card style="width:15%;position:fixed;top:120px;left:80%;z-index:999" nzTitle="剩余考试时间" nzHoverable=“true”>
+    <i nz-icon nzType="clock-circle" nzTheme="outline"></i>&nbsp;
+    <countdown *ngIf="config.stopTime" [config]="config" (finished)="autoSubmit()"></countdown>
+  </nz-card>
+
 
   <nz-card>
     <!-- 标题 -->

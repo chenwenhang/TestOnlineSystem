@@ -36,7 +36,8 @@ import {
   DeleteOutline,
   PlusOutline,
   GithubOutline,
-  StarFill
+  StarFill,
+  ClockCircleOutline
 } from '@ant-design/icons-angular/icons';
 
 export const ICONS_AUTO = [
@@ -73,5 +74,6 @@ export const ICONS_AUTO = [
   PlusOutline,
   CloudOutline,
   GithubOutline,
-  StarFill
+  StarFill,
+  ClockCircleOutline
 ];

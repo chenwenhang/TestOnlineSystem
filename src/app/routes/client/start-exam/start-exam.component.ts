@@ -6,6 +6,7 @@ import { STColumn, STComponent } from '@delon/abc';
 import { SFSchema, SFUISchema, SFComponent } from '@delon/form';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, Validators } from '@angular/forms';
+import { addMinutes } from 'date-fns';
 var validator = require('validator');
 var dateFormat = require('dateformat');
 
@@ -18,6 +19,13 @@ export class ClientStartExamComponent implements OnInit {
   paper: any;
   option = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'];
   answer = [];
+  target: any;
+  config = {
+    template: '$!d!天$!h!时$!m!分$!s!秒',
+    // leftTime: 35999.9,
+    stopTime: null,
+    clock: ['d', 100, 2, 'h', 24, 2, 'm', 60, 2, 's', 60, 2, 'u', 10, 1]
+  }
 
   constructor(
     private router: Router,
@@ -29,7 +37,7 @@ export class ClientStartExamComponent implements OnInit {
 
   ngOnInit() {
     // console.log("???");
-    
+
     let tmp = JSON.parse(localStorage.getItem('paper'));
     if (tmp) {
       // if mock exam
@@ -54,6 +62,8 @@ export class ClientStartExamComponent implements OnInit {
             this.paper = tmp;
             this.mock = "0";
             this.answer = this.paper.answers;
+            this.config.stopTime = endTimeStamp;
+
           } else {
             this.initNewExam();
 
@@ -81,6 +91,7 @@ export class ClientStartExamComponent implements OnInit {
       if (!this.paper) {
         alert("当前没有考试！");
         this.router.navigate(['/dashboard']);
+        return;
         // window.location.href="/#/dashboard";
       }
       // if mock exam
@@ -88,7 +99,14 @@ export class ClientStartExamComponent implements OnInit {
 
         // if formal exam
       } else {
+        // console.log(this.paper)
+        // this.target = this.getTimeStamp(this.paper.end_time)/1000;
+        this.config.stopTime = this.getTimeStamp(this.paper.end_time);
 
+
+        // console.log(this.target)
+
+        // this.target = addMinutes(new Date, 1000);
 
       }
       if (this.paper) {
@@ -99,12 +117,52 @@ export class ClientStartExamComponent implements OnInit {
     })
   }
 
+  autoSubmit() {
+    // is_finish_exam
+    for (let i = 0; i < this.answer.length; i++) {
+      // transfer answer
+      if (Array.isArray(this.answer[i])) {
+        let j: number;
+        let str = "";
+        for (j = 0; j < this.answer[i].length - 1; j++) {
+          if (this.answer[i][j]) {
+            str += this.answer[i][j] + ","
+          }
+        }
+        if (this.answer[i][j]) {
+          str += this.answer[i][j];
+        }
+        this.answer[i] = str
+      }
+    }
+    // if mock exam
+    if (this.mock == "1") {
+      // add end_time
+      this.paper.end_time = dateFormat(new Date(), 'yyyy-mm-dd HH:MM:ss');
+    }
+    // add username
+    this.paper.username = JSON.parse(localStorage.getItem('user')).username;
+    // add answer to questions
+    for (let j = 0; j < this.paper.questions.length; j++) {
+      this.paper.questions[j].answer = this.answer[j];
+    }
+    // console.log(this.paper);
+    this.http.post(`/manage/paper_history/add?_allow_anonymous=true`, this.paper).subscribe((res: any) => {
+      this.modal
+        .createStatic(ClientStartExamViewComponent, { i: res.data })
+        .subscribe();
+    });
+  }
+
   submit() {
     // is_finish_exam
     for (let i = 0; i < this.answer.length; i++) {
       if (this.answer[i] == null) {
-        alert("请完成所有试题！！");
-        return;
+        let r = confirm("有试题尚未完成，确认交卷吗？");
+        if (r) {
+        } else {
+          return;
+        }
       }
       // transfer answer
       if (Array.isArray(this.answer[i])) {
