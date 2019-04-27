@@ -2,13 +2,15 @@ import { ManageQuestionManageViewComponent } from './view/view.component';
 import { ManageQuestionManageEditComponent } from './edit/edit.component';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { _HttpClient, ModalHelper } from '@delon/theme';
-import { STColumn, STComponent } from '@delon/abc';
+import { STColumn, STComponent, XlsxService } from '@delon/abc';
 import { SFSchema } from '@delon/form';
 import { NzMessageService } from 'ng-zorro-antd';
+var dateFormat = require('dateformat');
 
 @Component({
   selector: 'app-manage-question-manage',
   templateUrl: './question-manage.component.html',
+  styleUrls: ['./question-manage.component.less'],
 })
 export class ManageQuestionManageComponent implements OnInit {
   url = `/manage/question?_allow_anonymous=true`;
@@ -34,7 +36,7 @@ export class ManageQuestionManageComponent implements OnInit {
   };
   @ViewChild('st') st: STComponent;
   columns: STColumn[] = [
-    { title: '题干', index: 'content',width:'40%' },
+    { title: '题干', index: 'content', width: '40%' },
     { title: '类型', index: 'type' },
     { title: '标签', index: 'tag', render: 'custom', },
     { title: '创建时间', index: 'create_time' },
@@ -74,6 +76,7 @@ export class ManageQuestionManageComponent implements OnInit {
     private http: _HttpClient,
     private modal: ModalHelper,
     private msgSrv: NzMessageService,
+    private xlsx: XlsxService,
   ) { }
 
   ngOnInit() { }
@@ -95,4 +98,36 @@ export class ManageQuestionManageComponent implements OnInit {
     })
   }
 
+  change(e: Event) {
+    const node = e.target as HTMLInputElement;
+    let data: any;
+    let questions = [];
+    this.xlsx.import(node.files![0]).then(res => {
+      data = res.Sheet1;
+      for (let i = 0; i < data.length; i++) {
+        let que = data[i];
+        let tmp = {
+          type: que[0],
+          content: que[1],
+          analysis: que[2].split(','),
+          right: que[3],
+          explanation: que[4],
+          tag: que[5].split(','),
+          create_time: dateFormat(new Date(), 'yyyy-mm-dd HH:MM:ss')
+        }
+        questions.push(tmp);
+      }
+      this.http.post(`/manage/question/addMultiple?_allow_anonymous=true`, questions).subscribe((res: any) => {
+        if (!res.code) {
+          this.msgSrv.error(res.msg);
+          return;
+        }
+        this.msgSrv.success(res.msg);
+      });
+
+    });
+    // node.value = '';
+
+
+  }
 }

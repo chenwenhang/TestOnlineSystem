@@ -3,7 +3,7 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2019-04-03 23:12:29
- * @LastEditTime: 2019-04-21 15:42:31
+ * @LastEditTime: 2019-04-27 16:29:27
  -->
 <page-header [action]="phActionTpl">
   <ng-template #phActionTpl>
@@ -11,12 +11,24 @@
   </ng-template>
 </page-header>
 <nz-card>
-  <sf mode="search" [schema]="searchSchema" (formSubmit)="st.reset($event)" (formReset)="st.reset($event)"></sf>
-  <st #st [data]="url" [columns]="columns" [res]="res" [req]="req" ps="10" [noResult]="'这个表是空的哦~'">
-    <ng-template st-row="custom" let-item let-index="index">
-      <nz-tooltip>
-        <nz-tag [nzColor]="'#87d068'" *ngFor="let element of item.tag">{{element}}</nz-tag>
-      </nz-tooltip>
-    </ng-template>
-  </st>
+  <div nz-row>
+    <div nz-col nzSpan="20">
+      <sf mode="search" [schema]="searchSchema" (formSubmit)="st.reset($event)" (formReset)="st.reset($event)"></sf>
+    </div>
+    <div nz-col nzSpan="4">
+      <label class="cwh_import ant-btn ng-star-inserted ant-btn-primary">
+        从EXCEL中导入
+        <input type="file" (change)="change($event)" multiple="false"  hidden />
+      </label>
+    </div>
+  </div>
+  <div nz-row>
+    <st #st [data]="url" [columns]="columns" [res]="res" [req]="req" ps="10" [noResult]="'这个表是空的哦~'">
+      <ng-template st-row="custom" let-item let-index="index">
+        <nz-tooltip>
+          <nz-tag [nzColor]="'#87d068'" *ngFor="let element of item.tag">{{element}}</nz-tag>
+        </nz-tooltip>
+      </ng-template>
+    </st>
+  </div>
 </nz-card>
