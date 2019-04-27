@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { _HttpClient, ModalHelper } from '@delon/theme';
-import { STColumn, STComponent } from '@delon/abc';
+import { STColumn, STComponent,XlsxService } from '@delon/abc';
 import { SFSchema } from '@delon/form';
 import { Router } from '@angular/router';
 
@@ -36,7 +36,8 @@ export class ClientExamHistoryComponent implements OnInit {
     { title: '标题', index: 'title', width: '25%' },
     { title: '作者', index: 'create_user' },
     { title: '适用职业', index: 'occupation', default: "模拟考试" },
-    { title: '创建时间', index: 'create_time' },
+    { title: '得分', index: 'my_mark' },
+    { title: '总分', index: 'total_mark' },
     {
       title: '',
       buttons: [
@@ -56,9 +57,8 @@ export class ClientExamHistoryComponent implements OnInit {
     private http: _HttpClient,
     private modal: ModalHelper,
     private router: Router,
-
+    private xlsx: XlsxService,
   ) { }
 
   ngOnInit() { }
-
 }

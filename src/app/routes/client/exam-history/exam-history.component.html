@@ -3,12 +3,20 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2019-04-17 22:21:12
- * @LastEditTime: 2019-04-26 19:28:02
+ * @LastEditTime: 2019-04-27 16:57:52
  -->
 <page-header>
 </page-header>
 <nz-card>
-  <sf mode="search" [schema]="searchSchema" (formSubmit)="st.reset($event)" (formReset)="st.reset($event)"></sf>
-  <st #st [data]="url" [columns]="columns" [res]="res" [req]="req" ps="10" [noResult]="'这个表是空的哦~'">
-  </st>
+  <div nz-row>
+    <div nz-col nzSpan="20">
+      <sf mode="search" [schema]="searchSchema" (formSubmit)="st.reset($event)" (formReset)="st.reset($event)"></sf>
+    </div>
+    <div nz-col nzSpan="4">
+      <button nz-button nzType="primary" (click)="st.export()">导出为EXCEL</button>
+    </div>
+  </div>
+  <div nz-row>
+    <st #st [data]="url" [columns]="columns" [res]="res" [req]="req" ps="10" [noResult]="'这个表是空的哦~'"></st>
+  </div>
 </nz-card>
