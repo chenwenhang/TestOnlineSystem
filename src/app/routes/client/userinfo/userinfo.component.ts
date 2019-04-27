@@ -1,10 +1,8 @@
 import { StartupService } from '@core';
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { _HttpClient } from '@delon/theme';
-import { NzMessageService, UploadFile, UploadChangeParam } from 'ng-zorro-antd';
-import { SFSchema, SFUISchema, SFButton, SFComponent } from '@delon/form';
-import { delay } from 'rxjs/operators';
-import { of, Observable, Observer } from 'rxjs';
+import { NzMessageService, UploadFile } from 'ng-zorro-antd';
+import { Observable, Observer } from 'rxjs';
 
 @Component({
   selector: 'app-client-userinfo',
@@ -27,22 +25,15 @@ export class ClientUserinfoComponent implements OnInit {
 
 
   ngOnInit() {
-    // delete this.user.occupation;
     this.http.get(`/manage/occupation?_allow_anonymous=true`).subscribe((res: any) => {
       for (let i = 0; i < res.data.length; i++) {
         let tmp = res.data[i].occupation;
         this.occupation.push(tmp);
       }
-      // this.schema.properties.occupation.enum = this.occupation;
-      // this.sf.refreshSchema();
     })
-    // this.http.get(`/manage/user/detail?_allow_anonymous=true&_id=${this.user._id}`).subscribe((res: any) => {
-    //   this.user = res.data;
-    // })
   }
 
   save() {
-    // console.log(this.user);
     // 深复制的坑，记录！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
     let tmp = JSON.parse(JSON.stringify(this.user));
     delete tmp.avatar;
@@ -52,8 +43,6 @@ export class ClientUserinfoComponent implements OnInit {
         return;
       }
       this.msg.success(res.msg);
-      // console.log(this.user);
-
       this.startupService.setUser(this.user);
     });
   }
@@ -62,11 +51,6 @@ export class ClientUserinfoComponent implements OnInit {
 
   }
 
-  add() {
-    // this.modal
-    //   .createStatic(FormEditComponent, { i: { id: 0 } })
-    //   .subscribe(() => this.st.reload());
-  }
   beforeUpload = (file: File) => {
     return new Observable((observer: Observer<boolean>) => {
       const isJPG = file.type === 'image/jpeg';

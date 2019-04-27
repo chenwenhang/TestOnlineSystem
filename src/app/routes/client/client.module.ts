@@ -11,8 +11,6 @@ import { ClientUserinfoComponent } from './userinfo/userinfo.component';
 import { ClientStartExamComponent } from './start-exam/start-exam.component';
 import { ClientStartExamViewComponent } from './start-exam/view/view.component';
 import { ClientHistoryDetailComponent } from './history-detail/history-detail.component';
-import { ClientHistoryDetailEditComponent } from './history-detail/edit/edit.component';
-import { ClientHistoryDetailViewComponent } from './history-detail/view/view.component';
 import { ClientDataAnalysisComponent } from './data-analysis/data-analysis.component';
 
 const COMPONENTS = [
@@ -27,9 +25,7 @@ const COMPONENTS = [
 const COMPONENTS_NOROUNT = [
   ClientFormalExamViewComponent,
   ClientQuestionCollectionViewComponent,
-  ClientStartExamViewComponent,
-  ClientHistoryDetailEditComponent,
-  ClientHistoryDetailViewComponent];
+  ClientStartExamViewComponent];
 
 @NgModule({
   imports: [

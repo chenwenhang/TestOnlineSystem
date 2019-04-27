@@ -3,7 +3,6 @@ import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 import { SFSchema, SFUISchema } from '@delon/form';
 import { of } from 'rxjs';
-import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-manage-occupation-manage-edit',
@@ -56,7 +55,6 @@ export class ManageOccupationManageEditComponent implements OnInit {
         let tmp = res.data[i].tag;
         this.tag.push({ label: tmp, value: tmp });
       }
-      // console.log(this.tag);
     })
   }
 
@@ -72,7 +70,6 @@ export class ManageOccupationManageEditComponent implements OnInit {
       });
     } else {
       delete value._id;
-      // console.log(value);     
       this.http.post(`/manage/occupation/add?_allow_anonymous=true`, value).subscribe((res: any) => {
         if (!res.code) {
           this.msgSrv.error(res.msg);

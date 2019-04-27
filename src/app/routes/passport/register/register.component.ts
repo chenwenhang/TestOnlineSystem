@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import {
   FormGroup,
@@ -8,8 +8,6 @@ import {
 } from '@angular/forms';
 import { NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
-import { of } from 'rxjs';
-import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'passport-register',

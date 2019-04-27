@@ -69,12 +69,6 @@ export class ClientQuestionCollectionComponent implements OnInit {
 
   ngOnInit() { }
 
-  add() {
-    // this.modal
-    //   .createStatic(FormEditComponent, { i: { id: 0 } })
-    //   .subscribe(() => this.st.reload());
-  }
-
   delete(item: any) {
     this.http.delete(`/manage/question_collection/delete?_allow_anonymous=true`, item).subscribe((res: any) => {
       if (!res.code) {

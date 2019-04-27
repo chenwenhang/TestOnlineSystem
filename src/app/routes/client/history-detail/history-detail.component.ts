@@ -1,7 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { _HttpClient, ModalHelper } from '@delon/theme';
-import { STColumn, STComponent } from '@delon/abc';
-import { SFSchema } from '@delon/form';
 import { ActivatedRoute } from '@angular/router';
 import { NzMessageService } from 'ng-zorro-antd';
 
@@ -49,36 +47,20 @@ export class ClientHistoryDetailComponent implements OnInit {
 
   // before change 
   change(num: any) {
-    // console.log(this.paper);
-    // console.log(this.collectionNum[num]);
-
     // add to collection
     if (!this.collectionNum[num]) {
       let que = JSON.parse(JSON.stringify(this.paper.questions[num]));
       que.username = this.username;
       que.question_id = que._id;
       delete que._id;
-
       this.http.post(`/manage/question_collection/add?_allow_anonymous=true`, que).subscribe((res: any) => {
-        // console.log(res);
         this.msgSrv.success("收藏成功！");
-
       })
       // delete from collection
     } else {
       this.http.delete(`/manage/question_collection/delete?_allow_anonymous=true&question_id=${this.paper.questions[num]._id}&username=${this.username}`).subscribe((res: any) => {
-        // console.log(res);
         this.msgSrv.success("取消收藏成功！");
-
-
       })
     }
-
-
-    // this.modal
-    //   .createStatic(FormEditComponent, { i: { id: 0 } })
-    //   .subscribe(() => this.st.reload());
   }
-
-
 }

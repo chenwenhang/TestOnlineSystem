@@ -34,7 +34,6 @@ export class ManageTagManageComponent implements OnInit {
   };
   @ViewChild('st') st: STComponent;
   columns: STColumn[] = [
-    // { title: '编号', index: '_id' },
     { title: '标签名', index: 'tag' },
     {
       title: '',

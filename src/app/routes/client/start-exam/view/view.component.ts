@@ -23,8 +23,6 @@ export class ClientStartExamViewComponent implements OnInit {
   }
 
   viewHistory(value: any) {
-    // console.log(value);
-    
     this.router.navigate(['/client/history-detail'], { queryParams: { '_id': value._id } });
 
   }

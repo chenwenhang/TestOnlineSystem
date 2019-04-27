@@ -21,7 +21,6 @@ export class ManagePaperManageEditComponent implements OnInit {
       title: { type: 'string', title: '标题' },
       instructions: { type: 'string', title: '考卷概述' },
       occupation: { type: 'string', title: '适用职业', enum: [] },
-      // total_mark: { type: 'string', title: '总分' },
       is_valid: {
         type: 'boolean',
         title: '是否有效',

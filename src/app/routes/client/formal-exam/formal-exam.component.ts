@@ -4,7 +4,6 @@ import { _HttpClient, ModalHelper } from '@delon/theme';
 import { STColumn, STComponent } from '@delon/abc';
 import { SFSchema } from '@delon/form';
 import { NzMessageService } from 'ng-zorro-antd';
-import { ClientStartExamComponent } from '../start-exam/start-exam.component';
 import { Router } from '@angular/router';
 import { ShareService } from '@core/startup/share.service';
 

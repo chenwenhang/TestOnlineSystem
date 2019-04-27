@@ -1,7 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { _HttpClient, ModalHelper } from '@delon/theme';
-import { STColumn, STComponent } from '@delon/abc';
-import { SFSchema } from '@delon/form';
 
 @Component({
   selector: 'app-client-data-analysis',
@@ -30,16 +28,8 @@ export class ClientDataAnalysisComponent implements OnInit {
         })
       }
       this.collect = res.data[4];
-      // console.log(this.salesData);
-
     });
 
-  }
-
-  add() {
-    // this.modal
-    //   .createStatic(FormEditComponent, { i: { id: 0 } })
-    //   .subscribe(() => this.st.reload());
   }
 
 }

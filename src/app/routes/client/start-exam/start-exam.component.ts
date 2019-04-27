@@ -1,12 +1,8 @@
 import { ClientStartExamViewComponent } from './view/view.component';
 import { ShareService } from '@core/startup/share.service';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { _HttpClient, ModalHelper } from '@delon/theme';
-import { STColumn, STComponent } from '@delon/abc';
-import { SFSchema, SFUISchema, SFComponent } from '@delon/form';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, Validators } from '@angular/forms';
-import { addMinutes } from 'date-fns';
 var validator = require('validator');
 var dateFormat = require('dateformat');
 
@@ -22,7 +18,6 @@ export class ClientStartExamComponent implements OnInit {
   target: any;
   config = {
     template: '$!d!天$!h!时$!m!分$!s!秒',
-    // leftTime: 35999.9,
     stopTime: null,
     clock: ['d', 100, 2, 'h', 24, 2, 'm', 60, 2, 's', 60, 2, 'u', 10, 1]
   }
@@ -36,8 +31,6 @@ export class ClientStartExamComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // console.log("???");
-
     let tmp = JSON.parse(localStorage.getItem('paper'));
     if (tmp) {
       // if mock exam
@@ -49,7 +42,6 @@ export class ClientStartExamComponent implements OnInit {
           this.answer = this.paper.answers;
         } else {
           this.initNewExam();
-
         }
       } else {
         // if formal exam
@@ -63,20 +55,16 @@ export class ClientStartExamComponent implements OnInit {
             this.mock = "0";
             this.answer = this.paper.answers;
             this.config.stopTime = endTimeStamp;
-
           } else {
             this.initNewExam();
-
           }
           // if not valid
         } else {
           this.initNewExam();
-
         }
       }
     } else {
       this.initNewExam();
-
     }
   }
 
@@ -87,7 +75,6 @@ export class ClientStartExamComponent implements OnInit {
       // url can only pass string
       this.mock = data.mock;
       this.paper = this.shareService.getPaper();
-      // if 
       if (!this.paper) {
         alert("当前没有考试！");
         this.router.navigate(['/dashboard']);
@@ -96,18 +83,9 @@ export class ClientStartExamComponent implements OnInit {
       }
       // if mock exam
       if (this.mock == "1") {
-
         // if formal exam
       } else {
-        // console.log(this.paper)
-        // this.target = this.getTimeStamp(this.paper.end_time)/1000;
         this.config.stopTime = this.getTimeStamp(this.paper.end_time);
-
-
-        // console.log(this.target)
-
-        // this.target = addMinutes(new Date, 1000);
-
       }
       if (this.paper) {
         for (let k = 0; k < this.paper.questions.length; k++) {
@@ -146,7 +124,6 @@ export class ClientStartExamComponent implements OnInit {
     for (let j = 0; j < this.paper.questions.length; j++) {
       this.paper.questions[j].answer = this.answer[j];
     }
-    // console.log(this.paper);
     this.http.post(`/manage/paper_history/add?_allow_anonymous=true`, this.paper).subscribe((res: any) => {
       this.modal
         .createStatic(ClientStartExamViewComponent, { i: res.data })
@@ -158,11 +135,13 @@ export class ClientStartExamComponent implements OnInit {
     // is_finish_exam
     for (let i = 0; i < this.answer.length; i++) {
       if (this.answer[i] == null) {
-        let r = confirm("有试题尚未完成，确认交卷吗？");
-        if (r) {
-        } else {
-          return;
-        }
+        alert("有试题尚未完成，请继续作答！");
+        return;
+        // let r = confirm("有试题尚未完成，确认交卷吗？");
+        // if (r) {
+        // } else {
+        //   return;
+        // }
       }
       // transfer answer
       if (Array.isArray(this.answer[i])) {
@@ -179,7 +158,6 @@ export class ClientStartExamComponent implements OnInit {
         this.answer[i] = str
       }
     }
-
     // if mock exam
     if (this.mock == "1") {
       // add end_time
@@ -187,14 +165,10 @@ export class ClientStartExamComponent implements OnInit {
     }
     // add username
     this.paper.username = JSON.parse(localStorage.getItem('user')).username;
-
     // add answer to questions
     for (let j = 0; j < this.paper.questions.length; j++) {
       this.paper.questions[j].answer = this.answer[j];
-
     }
-
-    // console.log(this.paper);
     this.http.post(`/manage/paper_history/add?_allow_anonymous=true`, this.paper).subscribe((res: any) => {
       this.modal
         .createStatic(ClientStartExamViewComponent, { i: res.data })
@@ -219,7 +193,7 @@ export class ClientStartExamComponent implements OnInit {
     }
   }
 
-  saveExam(value: any) {
+  saveExam() {
     this.paper.answers = this.answer;
     localStorage.setItem("paper", JSON.stringify(this.paper));
   }

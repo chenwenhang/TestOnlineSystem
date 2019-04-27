@@ -1,7 +1,6 @@
 var dateFormat = require('dateformat');
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { _HttpClient, ModalHelper } from '@delon/theme';
-import { STColumn, STComponent } from '@delon/abc';
+import { Component, OnInit } from '@angular/core';
+import { _HttpClient } from '@delon/theme';
 import { SFSchema, SFUISchema } from '@delon/form';
 import { NzMessageService } from 'ng-zorro-antd';
 import { of } from 'rxjs';
@@ -61,14 +60,7 @@ export class ClientMockExamComponent implements OnInit {
         let tmp = res.data[i].tag;
         this.tag.push({ label: tmp, value: tmp });
       }
-      // console.log(this.tag);
     })
-  }
-
-  add() {
-    // this.modal
-    //   .createStatic(FormEditComponent, { i: { id: 0 } })
-    //   .subscribe(() => this.st.reload());
   }
 
   submit($event) {

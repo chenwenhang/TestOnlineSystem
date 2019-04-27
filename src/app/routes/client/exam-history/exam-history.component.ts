@@ -61,10 +61,4 @@ export class ClientExamHistoryComponent implements OnInit {
 
   ngOnInit() { }
 
-  add() {
-    // this.modal
-    //   .createStatic(FormEditComponent, { i: { id: 0 } })
-    //   .subscribe(() => this.st.reload());
-  }
-
 }

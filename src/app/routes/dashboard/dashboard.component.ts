@@ -35,10 +35,6 @@ export class DashboardComponent implements OnInit {
         }
       }
       this.tags = tmpTags;
-      // console.log(this.tags);
-
-
-
     });
   }
 

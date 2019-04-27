@@ -3,7 +3,6 @@ import { NzModalRef, NzMessageService } from 'ng-zorro-antd';
 import { _HttpClient } from '@delon/theme';
 import { SFSchema, SFUISchema, SFComponent } from '@delon/form';
 import { of } from 'rxjs';
-import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-manage-question-manage-edit',
@@ -136,7 +135,6 @@ export class ManageQuestionManageEditComponent implements OnInit {
         for (let j = 0; j < tmp.length; j++) {
           this.i.analysis.push({ name: tmp[j] })
         }
-        // console.log(this.i);
       }
     }
     this.http.get(`/manage/tag?_allow_anonymous=true`).subscribe((res: any) => {
@@ -144,7 +142,6 @@ export class ManageQuestionManageEditComponent implements OnInit {
         let tmp = res.data[i].tag;
         this.tag.push({ label: tmp, value: tmp });
       }
-      // console.log(this.tag);
     })
   }
 
