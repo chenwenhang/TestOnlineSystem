@@ -3,7 +3,7 @@
  * @Description: 
  * @Github: https://github.com/chenwenhang
  * @Date: 2019-04-23 14:40:21
- * @LastEditTime: 2019-04-27 13:36:18
+ * @LastEditTime: 2019-04-27 13:53:59
  -->
 <page-header *ngIf="paper">
 </page-header>
@@ -16,9 +16,10 @@
     </button>
   </nz-affix>
 
-  <nz-card style="width:15%;position:fixed;top:120px;left:80%;z-index:999" nzTitle="剩余考试时间" nzHoverable=“true”>
+  <nz-card style="width:15%;position:fixed;top:120px;left:80%;z-index:999" nzTitle="剩余考试时间" nzHoverable=“true”
+    *ngIf="config.stopTime">
     <i nz-icon nzType="clock-circle" nzTheme="outline"></i>&nbsp;
-    <countdown *ngIf="config.stopTime" [config]="config" (finished)="autoSubmit()"></countdown>
+    <countdown [config]="config" (finished)="autoSubmit()"></countdown>
   </nz-card>
 
 
