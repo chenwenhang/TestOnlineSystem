@@ -51,39 +51,39 @@ ng serve # listen localhost:4200
 ## System screenshots
 
 #### Index
-![index.png](https://img03.sogoucdn.com/app/a/100520146/034be5e888de42f694d8aeed98837016)
+![index.png](http://echo-picture.oss-cn-beijing.aliyuncs.com/Github/TestOnlineSystem/index.png)
 #### Login
-![login.png](https://img04.sogoucdn.com/app/a/100520146/21ed15bd951614624d7bcf4a175be40b)
+![login.png](http://echo-picture.oss-cn-beijing.aliyuncs.com/Github/TestOnlineSystem/login.png)
 #### Formal exam
-![formal-exam.png](https://img02.sogoucdn.com/app/a/100520146/71176d1270a682e8609127ca91490e52)
+![formal-exam.png](http://echo-picture.oss-cn-beijing.aliyuncs.com/Github/TestOnlineSystem/formal-exam.png)
 #### Start exam
-![start-exam.png](https://img03.sogoucdn.com/app/a/100520146/310e4002e4b6f57565bbe7e12700352f)
+![start-exam.png](http://echo-picture.oss-cn-beijing.aliyuncs.com/Github/TestOnlineSystem/start-exam.png)
 #### User infomation
-![userinfo.png](https://img04.sogoucdn.com/app/a/100520146/24acd42ca7b3a4fc514adcab072bfd54)
+![userinfo.png](http://echo-picture.oss-cn-beijing.aliyuncs.com/Github/TestOnlineSystem/userinfo.png)
 #### Exam history
-![exam-history.png](https://img03.sogoucdn.com/app/a/100520146/b0d6808feec879f1e45be573e07e14a1)
+![exam-history.png](http://echo-picture.oss-cn-beijing.aliyuncs.com/Github/TestOnlineSystem/exam-history.png)
 #### Mock exam
-![mock-exam.png](https://img03.sogoucdn.com/app/a/100520146/865367d895836b193f36f98fcaf3f182)
+![mock-exam.png](http://echo-picture.oss-cn-beijing.aliyuncs.com/Github/TestOnlineSystem/mock-exam.png)
 #### My collection
-![my-collection.png](https://img04.sogoucdn.com/app/a/100520146/3018b10de9a876ebe8a51dc57aaa609a)
+![my-collection.png](http://echo-picture.oss-cn-beijing.aliyuncs.com/Github/TestOnlineSystem/my-collection.png)
 #### Paper manage
-![paper-manage.png](https://img04.sogoucdn.com/app/a/100520146/839c0cb2187d16e86c1916774a423fb9)
+![paper-manage.png](http://echo-picture.oss-cn-beijing.aliyuncs.com/Github/TestOnlineSystem/paper-manage.png)
 #### Paper detail
-![paper-detail.png](https://img04.sogoucdn.com/app/a/100520146/f33393161c7e44deb29260e3b17ebdb5)
+![paper-detail.png](http://echo-picture.oss-cn-beijing.aliyuncs.com/Github/TestOnlineSystem/paper-detail.png)
 #### Question manage
-![question-manage.png](https://img01.sogoucdn.com/app/a/100520146/a3dc5f113e9f8a413def096a14d38086)
+![question-manage.png](http://echo-picture.oss-cn-beijing.aliyuncs.com/Github/TestOnlineSystem/question-manage.png)
 #### Question detail
-![question-detail.png](https://img03.sogoucdn.com/app/a/100520146/7f42540afc88f3341f7487364ca77230)
+![question-detail.png](http://echo-picture.oss-cn-beijing.aliyuncs.com/Github/TestOnlineSystem/question-detail.png)
 #### Occupation manage
-![occupation.png](https://img02.sogoucdn.com/app/a/100520146/e25f68abcf98953cf37d24a410d7c1b9)
+![occupation.png](http://echo-picture.oss-cn-beijing.aliyuncs.com/Github/TestOnlineSystem/occupation.png)
 #### Tag manage
-![tag.png](https://img01.sogoucdn.com/app/a/100520146/6f788034ca922d62f3626c2eddfecf7d)
+![tag.png](http://echo-picture.oss-cn-beijing.aliyuncs.com/Github/TestOnlineSystem/tag.png)
 #### user manage
-![user.png](https://img01.sogoucdn.com/app/a/100520146/6f788034ca922d62f3626c2eddfecf7d)
+![user.png](http://echo-picture.oss-cn-beijing.aliyuncs.com/Github/TestOnlineSystem/user.png)
 #### Lock system
-![lock.png](https://img01.sogoucdn.com/app/a/100520146/c0f2dd00edb8bb129d0f8e7d4c3d7986)
+![lock.png](http://echo-picture.oss-cn-beijing.aliyuncs.com/Github/TestOnlineSystem/lock.png)
 #### Data analysis
-![data.png](https://img01.sogoucdn.com/app/a/100520146/0fa868f42b2717912c2fcc18a3bd4b23)
+![data.png](http://echo-picture.oss-cn-beijing.aliyuncs.com/Github/TestOnlineSystem/data.png)
 
 ## Links
 
